@@ -1,11 +1,18 @@
 using System.IO;
 using Microsoft.EntityFrameworkCore;
+using PasswordManagerWPF.MVVM.Model;
+using EncryptionMethod = System.Security.Cryptography.Xml.EncryptionMethod;
 
 namespace PasswordManagerWPF.Database;
 
 public class ApplicationContext : DbContext
 {
     private string DbPath { get; }
+
+    public DbSet<User> Users { get; set; } = null!;
+    public DbSet<Password> Passwords { get; set; } = null!;
+    public DbSet<EncryptionMethod> EncryptionMethods { get; set; } = null!;
+    public DbSet<Category> Categories { get; set; } = null!;
     public ApplicationContext()
     {
         var baseFolder = Environment.CurrentDirectory;
