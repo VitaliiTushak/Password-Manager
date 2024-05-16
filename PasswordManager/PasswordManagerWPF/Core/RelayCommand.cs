@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace PasswordManagerWPF.Core;
 
-public class RelayCommand(Action<object?> execute, Predicate<object?>? canExecute) : ICommand
+public class RelayCommand(Action<object?> execute, Predicate<object?>? canExecute = null) : ICommand
 {
     private readonly Action<object?>? _execute = execute;
     public event EventHandler? CanExecuteChanged

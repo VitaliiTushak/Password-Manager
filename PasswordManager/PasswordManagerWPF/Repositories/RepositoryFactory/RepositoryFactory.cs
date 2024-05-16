@@ -1,5 +1,4 @@
 using PasswordManagerWPF.Database;
-using PasswordManagerWPF.MVVM.Model;
 
 namespace PasswordManagerWPF.Repositories.RepositoryFactory
 {
@@ -11,7 +10,7 @@ namespace PasswordManagerWPF.Repositories.RepositoryFactory
 
         private static readonly object Lock = new object();
 
-        public static RepositoryFactory GetInstance(string configuration)
+        public static RepositoryFactory GetInstance()
         {
             if (_repositoryFactory == null)
             {

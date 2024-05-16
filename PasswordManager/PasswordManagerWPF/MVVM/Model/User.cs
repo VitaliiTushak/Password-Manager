@@ -1,8 +1,8 @@
 namespace PasswordManagerWPF.MVVM.Model;
 
-public class User(int id, string login, string password)
+public class User(string login, string password)
 {
-    public int Id { get; set; } = id;
+    public int Id { get; set; }
     public string Login { get; set; } = login;
     public string Password { get; set; } = password;
 }
