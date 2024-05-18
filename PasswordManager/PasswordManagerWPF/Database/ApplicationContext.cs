@@ -1,7 +1,6 @@
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using PasswordManagerWPF.MVVM.Model;
-using EncryptionMethod = System.Security.Cryptography.Xml.EncryptionMethod;
 
 namespace PasswordManagerWPF.Database;
 
@@ -11,7 +10,7 @@ public class ApplicationContext : DbContext
 
     public DbSet<User> Users { get; set; } = null!;
     public DbSet<Password> Passwords { get; set; } = null!;
-    public DbSet<EncryptionMethod> EncryptionMethods { get; set; } = null!;
+    public DbSet<SecurityMethod> EncryptionMethods { get; set; } = null!;
     public DbSet<Category> Categories { get; set; } = null!;
     public ApplicationContext()
     {
@@ -23,4 +22,5 @@ public class ApplicationContext : DbContext
     
     protected override void OnConfiguring(DbContextOptionsBuilder options)
         => options.UseSqlite($"Data Source={DbPath}");
+
 }
