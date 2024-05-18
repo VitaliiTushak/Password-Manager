@@ -55,4 +55,9 @@ public class UserRepository : IRepository<User>
     {
         return _context.Users.Find(id)!;
     }
+    
+    public User? GetUserByLogin(string login)
+    {
+        return _context.Users.FirstOrDefault(user => user.Login == login)!;
+    }
 }
