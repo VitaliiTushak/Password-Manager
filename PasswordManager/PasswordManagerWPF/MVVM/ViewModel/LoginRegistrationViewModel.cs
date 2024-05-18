@@ -4,17 +4,19 @@ using PasswordManagerWPF.MVVM.Model;
 using PasswordManagerWPF.MVVM.View;
 using PasswordManagerWPF.Repositories;
 using PasswordManagerWPF.Repositories.RepositoryFactory;
+using PasswordManagerWPF.Services.Dialog;
 using PasswordManagerWPF.Utilities;
+using PasswordManagerWPF.Utilities.User;
 using StringValidator = PasswordManagerWPF.Utilities.StringValidator;
 
 namespace PasswordManagerWPF.MVVM.ViewModel;
 
 public class LoginRegistrationViewModel : ObservableObject
 {
-    private string _login;
-    private string _password;
-    private string _repeatedPassword;
-    
+    private string _login = null!;
+    private string _password = null!;
+    private string _repeatedPassword = null!;
+
     public string Login
     {
         get => _login;
@@ -24,7 +26,6 @@ public class LoginRegistrationViewModel : ObservableObject
             OnPropertyChanged(nameof(Login));
         }
     }
-    
     public string Password
     {
         get => _password;
@@ -34,7 +35,6 @@ public class LoginRegistrationViewModel : ObservableObject
             OnPropertyChanged(nameof(Password));
         }
     }
-    
     public string RepeatedPassword
     {
         get => _repeatedPassword;
@@ -44,59 +44,45 @@ public class LoginRegistrationViewModel : ObservableObject
             OnPropertyChanged(nameof(RepeatedPassword));
         }
     }
+
+    private readonly UserRepository _userRepository;
+    private readonly UserValidator _userValidator;
     
-    private UserRepository _userRepository;
-    
+    public ICommand NavigateToRegistrationCommand { get; }
     public ICommand RegisterCommand { get; }
     public ICommand LoginCommand { get; }
-    
+
     public LoginRegistrationViewModel()
     {
-        RegisterCommand = new RelayCommand(DoRegister);
-        LoginCommand = new RelayCommand(DoLogin);
-        
         _userRepository = RepositoryFactory.GetInstance().GetUserRepository();
+        IDialogService dialogService = new DialogService();
+        _userValidator = new UserValidator(_userRepository, dialogService);
+        
+        NavigateToRegistrationCommand = new RelayCommand(ExecuteNavigateToRegistration);
+        RegisterCommand = new RelayCommand(ExecuteRegister);
+        LoginCommand = new RelayCommand(ExecuteLogin);
     }
 
-    private bool CanLogin(object? obj)
+    private void ExecuteNavigateToRegistration(object? obj)
     {
-        if (StringValidator.IsStringValid(Login) && StringValidator.IsStringValid(Password))
+        NavigationHelper.NavigateTo(new RegisterPage());
+    }
+
+    private void ExecuteLogin(object? obj)
+    {
+        if (_userValidator.ValidateLogin(Login, Password))
         {
-            var user = _userRepository.GetUserByLogin(Login);
-            if (user != null)
-            {
-                return user.Password == Password;
-            }
-            
-            return false;
+            NavigationHelper.NavigateTo(new MainPage());
         }
-        
-        return false;
     }
-    
-    private bool CanRegister(object? obj)
+
+    private void ExecuteRegister(object? obj)
     {
-        if (StringValidator.IsStringValid(Login) && StringValidator.IsStringValid(Password) && StringValidator.IsStringValid(RepeatedPassword))
+        if (_userValidator.ValidateRegistration(Login, Password, RepeatedPassword))
         {
-            return RepeatedPassword == Password;
+            var user = new User(Login, Password);
+            _userRepository.AddItem(user);
+            NavigationHelper.NavigateTo(new MainPage());
         }
-        
-        return false;
-    }
-
-    private void DoLogin(object? obj)
-    {
-        if (!CanLogin(obj)) return;
-        NavigationHelper.NavigateTo(new MainPage());
-    }
-
-    private void DoRegister(object? obj)
-    {
-        if (!CanRegister(obj)) return;
-        
-        var user = new User(Login, Password);
-        _userRepository.AddItem(user);
-        
-        NavigationHelper.NavigateTo(new MainPage());
     }
 }

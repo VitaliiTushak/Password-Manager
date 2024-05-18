@@ -35,6 +35,6 @@
         <Button Grid.Column="1" Grid.Row="2" Content="Вхід" Width="100" Margin="0 -80 0 0"
                 Command="{Binding LoginCommand}"/>
         <Button Grid.Column="1" Grid.Row="2" Content="Реєстрація" Width="100" Margin="0 30 0 0"
-                Command="{Binding RegisterCommand}"/>
+                Command="{Binding NavigateToRegistrationCommand}"/>
     </Grid>
 </Page>
