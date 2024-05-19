@@ -1,45 +1,49 @@
 using System.Windows.Input;
 using PasswordManagerWPF.Core;
 using PasswordManagerWPF.MVVM.View.Menu;
+using PasswordManagerWPF.Services.Navigation;
 
 namespace PasswordManagerWPF.MVVM.ViewModel.Menu;
 
 public class MenuViewModel : ObservableObject
 {
-    private object _currentViewModel = null!;
-    public object CurrentViewModel
-    {
-        get => _currentViewModel;
-        set
-        {
-            _currentViewModel = value;
-            OnPropertyChanged(nameof(CurrentViewModel));
-        }
-    }
-
     public ICommand NavigateCommand { get; }
+    
+    private readonly INavigationService _navigationService;
     
     
     public MenuViewModel()
     {
         NavigateCommand = new RelayCommand(NavigationExecute);
-        
-        CurrentViewModel = new DashboardViewModel();
+        _navigationService = new CustomNavigationService();
+        _navigationService.NavigateTo(new DashboardViewModel());
     }
 
     private void NavigationExecute(object? obj)
     {
         if (obj is string destination)
         {
-            CurrentViewModel = destination switch
+            switch (destination)
             {
-                "Dashboard" => new DashboardViewModel(),
-                "Passwords" => new PasswordsViewModel(),
-                "ImportExport" => new ImportExportViewModel(),
-                "Settings" => new SettingsViewModel(),
-                "About" => new AboutViewModel(),
-                _ => throw new ArgumentOutOfRangeException(nameof(destination), destination, null)
-            };
+                case "Dashboard":
+                    _navigationService.NavigateTo(new DashboardViewModel());
+                    break;
+                case "Passwords":
+                    //_navigationService.NavigateTo(new PasswordsViewModel());
+                    break;
+                case "ImportExport":
+                    //_navigationService.NavigateTo(new ImportExportViewModel());
+                    break;
+                case "Settings":
+                   // _navigationService.NavigateTo(new SettingsViewModel());
+                    break;
+                case "About":
+                    //_navigationService.NavigateTo(new AboutViewModel());
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(destination), destination, null);
+            }
         }
     }
+
 }

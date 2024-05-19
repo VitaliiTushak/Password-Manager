@@ -1,16 +1,6 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using PasswordManagerWPF.MVVM.View;
-using PasswordManagerWPF.MVVM.View.Auth;
-using PasswordManagerWPF.Utilities;
+﻿using System.Windows;
+using PasswordManagerWPF.MVVM.ViewModel.Auth;
+using PasswordManagerWPF.Services.Navigation;
 
 namespace PasswordManagerWPF;
 
@@ -22,8 +12,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        var navigationService = MainFrame.NavigationService;
-        NavigationHelper.SetNavigationService(navigationService);
-        NavigationHelper.NavigateTo(new LoginPage());
+        var navigationService = new CustomNavigationService();
+        navigationService.NavigateTo(new LoginViewModel());
     }
 }

@@ -4,9 +4,9 @@ using PasswordManagerWPF.Utilities;
 
 namespace PasswordManagerWPF.MVVM.View.Menu;
 
-public partial class MainPage : Page
+public partial class MenuView : Page
 {
-    public MainPage()
+    public MenuView()
     {
         InitializeComponent();
         DataContext = new MenuViewModel();
