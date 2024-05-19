@@ -1,13 +1,14 @@
 using System.Windows.Controls;
 using PasswordManagerWPF.MVVM.ViewModel;
+using PasswordManagerWPF.MVVM.ViewModel.Auth;
 
 namespace PasswordManagerWPF.MVVM.View.Auth;
 
-public partial class LoginPage : Page
+public partial class LoginView : Page
 {
-    public LoginPage()
+    public LoginView()
     {
         InitializeComponent();
-        DataContext = new LoginRegistrationViewModel();
+        DataContext = new LoginViewModel();
     }
 }

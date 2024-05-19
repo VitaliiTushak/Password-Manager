@@ -1,4 +1,4 @@
-<Page x:Class="PasswordManagerWPF.MVVM.View.Menu.MainPage"
+<Page x:Class="PasswordManagerWPF.MVVM.View.Menu.MenuView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -7,26 +7,7 @@
       xmlns:viewModels="clr-namespace:PasswordManagerWPF.MVVM.ViewModel.Menu"
       xmlns:views="clr-namespace:PasswordManagerWPF.MVVM.View.Menu"
       mc:Ignorable="d"
-      Title="MainPage" Height="450" Width="800">
-
-    <Page.Resources>
-        <DataTemplate DataType="{x:Type viewModels:DashboardViewModel}">
-            <views:DashboardPage />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModels:PasswordsViewModel}">
-            <views:PasswordsPage />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModels:ImportExportViewModel}">
-            <views:ImportExportPage />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModels:SettingsViewModel}">
-            <views:SettingsPage />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModels:AboutViewModel}">
-            <views:AboutPage />
-        </DataTemplate>
-    </Page.Resources>
-
+      Title="MenuView" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -81,6 +62,6 @@
             </StackPanel>
         </Grid>
 
-        <Frame Grid.Column="1" Grid.Row="1" Content="{Binding CurrentViewModel}" />
+        <Frame Grid.Column="1" Grid.Row="1" Name="MainProgramFrame" />
     </Grid>
 </Page>

@@ -1,19 +1,16 @@
 using System.Windows.Input;
 using PasswordManagerWPF.Core;
-using PasswordManagerWPF.MVVM.Model;
-using PasswordManagerWPF.MVVM.View;
-using PasswordManagerWPF.MVVM.View.Auth;
 using PasswordManagerWPF.MVVM.View.Menu;
-using PasswordManagerWPF.Repositories;
+using PasswordManagerWPF.MVVM.ViewModel.Menu;
 using PasswordManagerWPF.Repositories.RepositoryFactory;
 using PasswordManagerWPF.Services.Dialog;
+using PasswordManagerWPF.Services.Navigation;
 using PasswordManagerWPF.Utilities;
 using PasswordManagerWPF.Utilities.User;
-using StringValidator = PasswordManagerWPF.Utilities.StringValidator;
 
-namespace PasswordManagerWPF.MVVM.ViewModel;
+namespace PasswordManagerWPF.MVVM.ViewModel.Auth;
 
-public class LoginRegistrationViewModel : ObservableObject
+public class LoginViewModel : ObservableObject
 {
     private string _login = null!;
     private string _password = null!;
@@ -47,44 +44,32 @@ public class LoginRegistrationViewModel : ObservableObject
         }
     }
 
-    private readonly UserRepository _userRepository;
     private readonly UserValidator _userValidator;
+    private readonly INavigationService _navigationService = new CustomNavigationService();
     
     public ICommand NavigateToRegistrationCommand { get; }
-    public ICommand RegisterCommand { get; }
     public ICommand LoginCommand { get; }
 
-    public LoginRegistrationViewModel()
+    public LoginViewModel()
     {
-        _userRepository = RepositoryFactory.GetInstance().GetUserRepository();
+        var userRepository = RepositoryFactory.GetInstance().GetUserRepository();
         IDialogService dialogService = new DialogService();
-        _userValidator = new UserValidator(_userRepository, dialogService);
+        _userValidator = new UserValidator(userRepository, dialogService);
         
         NavigateToRegistrationCommand = new RelayCommand(ExecuteNavigateToRegistration);
-        RegisterCommand = new RelayCommand(ExecuteRegister);
         LoginCommand = new RelayCommand(ExecuteLogin);
     }
 
     private void ExecuteNavigateToRegistration(object? obj)
     {
-        NavigationHelper.NavigateTo(new RegisterPage());
+        _navigationService.NavigateTo(new RegisterViewModel());
     }
 
     private void ExecuteLogin(object? obj)
     {
         if (_userValidator.ValidateLogin(Login, Password))
         {
-            NavigationHelper.NavigateTo(new MainPage());
-        }
-    }
-
-    private void ExecuteRegister(object? obj)
-    {
-        if (_userValidator.ValidateRegistration(Login, Password, RepeatedPassword))
-        {
-            var user = new User(Login, Password);
-            _userRepository.AddItem(user);
-            NavigationHelper.NavigateTo(new MainPage());
+            _navigationService.NavigateTo(new MenuViewModel());
         }
     }
 }

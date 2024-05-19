@@ -4,9 +4,9 @@ using PasswordManagerWPF.MVVM.ViewModel.Menu;
 
 namespace PasswordManagerWPF.MVVM.View.Menu;
 
-public partial class DashboardPage : Page
+public partial class DashboardView : Page
 {
-    public DashboardPage()
+    public DashboardView()
     {
         InitializeComponent();
         DataContext = new DashboardViewModel();
