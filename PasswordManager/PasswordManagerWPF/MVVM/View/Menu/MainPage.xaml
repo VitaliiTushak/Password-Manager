@@ -3,11 +3,30 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:PasswordManagerWPF.MVVM.View.Menu"
       xmlns:viewModels="clr-namespace:PasswordManagerWPF.MVVM.ViewModel.Menu"
       xmlns:views="clr-namespace:PasswordManagerWPF.MVVM.View.Menu"
-      xmlns:viewModel="clr-namespace:PasswordManagerWPF.MVVM.ViewModel.Menu"
       mc:Ignorable="d"
       Title="MainPage" Height="450" Width="800">
+
+    <Page.Resources>
+        <DataTemplate DataType="{x:Type viewModels:DashboardViewModel}">
+            <views:DashboardPage />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:PasswordsViewModel}">
+            <views:PasswordsPage />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:ImportExportViewModel}">
+            <views:ImportExportPage />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:SettingsViewModel}">
+            <views:SettingsPage />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:AboutViewModel}">
+            <views:AboutPage />
+        </DataTemplate>
+    </Page.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -18,67 +37,42 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         
-        <Border Grid.Column="0" Grid.Row="0" 
-                Height="40">
-            <TextBlock Text="Password Manager"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       FontWeight="Bold"
-                       FontSize="16"></TextBlock>
+        <Border Grid.Column="0" Grid.Row="0" Height="40">
+            <TextBlock Text="Password Manager" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16" />
         </Border>
         
-        <Grid Column="0" Grid.Row="1">
+        <Grid Grid.Column="0" Grid.Row="1">
             <StackPanel Orientation="Vertical">
-                <Border Height="40" 
-                        BorderBrush="Black" 
-                        BorderThickness="1">
-                    <TextBlock Text="Dashboard"
-                               Margin="10 0 0 0"
-                               VerticalAlignment="Center">
+                <Border Height="40" BorderBrush="Black" BorderThickness="1">
+                    <TextBlock Text="Dashboard" Margin="10 0 0 0" VerticalAlignment="Center">
                         <TextBlock.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding NavigateCommand}" CommandParameter="Dashboard" />
                         </TextBlock.InputBindings>
                     </TextBlock>
                 </Border>
-                <Border Height="40" 
-                        BorderBrush="Black" 
-                        BorderThickness="1">
-                    <TextBlock Text="Passwords"
-                               Margin="10 0 0 0"
-                               VerticalAlignment="Center">
+                <Border Height="40" BorderBrush="Black" BorderThickness="1">
+                    <TextBlock Text="Passwords" Margin="10 0 0 0" VerticalAlignment="Center">
                         <TextBlock.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding NavigateCommand}" CommandParameter="Passwords" />
                         </TextBlock.InputBindings>
                     </TextBlock>
                 </Border>
-                <Border Height="40" 
-                        BorderBrush="Black" 
-                        BorderThickness="1">
-                    <TextBlock Text="Import/Export"
-                               Margin="10 0 0 0"
-                               VerticalAlignment="Center">
+                <Border Height="40" BorderBrush="Black" BorderThickness="1">
+                    <TextBlock Text="Import/Export" Margin="10 0 0 0" VerticalAlignment="Center">
                         <TextBlock.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding NavigateCommand}" CommandParameter="ImportExport" />
                         </TextBlock.InputBindings>
                     </TextBlock>
                 </Border>
-                <Border Height="40" 
-                        BorderBrush="Black" 
-                        BorderThickness="1">
-                    <TextBlock Text="Settings"
-                               Margin="10 0 0 0"
-                               VerticalAlignment="Center">
+                <Border Height="40" BorderBrush="Black" BorderThickness="1">
+                    <TextBlock Text="Settings" Margin="10 0 0 0" VerticalAlignment="Center">
                         <TextBlock.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding NavigateCommand}" CommandParameter="Settings" />
                         </TextBlock.InputBindings>
                     </TextBlock>
                 </Border>
-                <Border Height="40" 
-                        BorderBrush="Black" 
-                        BorderThickness="1">
-                    <TextBlock Text="About"
-                               Margin="10 0 0 0"
-                               VerticalAlignment="Center">
+                <Border Height="40" BorderBrush="Black" BorderThickness="1">
+                    <TextBlock Text="About" Margin="10 0 0 0" VerticalAlignment="Center">
                         <TextBlock.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding NavigateCommand}" CommandParameter="About" />
                         </TextBlock.InputBindings>
@@ -86,14 +80,7 @@
                 </Border>
             </StackPanel>
         </Grid>
-        
-        
-        
-        
-        <Frame Grid.Column="1" Grid.Row="1" NavigationUIVisibility="Hidden">
-            <Frame.Source>
-                <Binding Path="CurrentViewModel" />
-            </Frame.Source>
-        </Frame>
+
+        <Frame Grid.Column="1" Grid.Row="1" Content="{Binding CurrentViewModel}" />
     </Grid>
 </Page>
