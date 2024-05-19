@@ -4,9 +4,9 @@ using PasswordManagerWPF.MVVM.ViewModel.Menu;
 
 namespace PasswordManagerWPF.MVVM.View.Menu;
 
-public partial class SettingsPage : Page
+public partial class SettingsView : Page
 {
-    public SettingsPage()
+    public SettingsView()
     {
         InitializeComponent();
         

@@ -3,9 +3,9 @@ using PasswordManagerWPF.MVVM.ViewModel.Menu;
 
 namespace PasswordManagerWPF.MVVM.View.Menu;
 
-public partial class ImportExportPage : Page
+public partial class ImportExportView : Page
 {
-    public ImportExportPage()
+    public ImportExportView()
     {
         InitializeComponent();
         

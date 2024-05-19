@@ -3,12 +3,11 @@ using PasswordManagerWPF.MVVM.ViewModel.Menu;
 
 namespace PasswordManagerWPF.MVVM.View.Menu;
 
-public partial class AboutPage : Page
+public partial class CategoriesView : Page
 {
-    public AboutPage()
+    public CategoriesView()
     {
         InitializeComponent();
-
-        DataContext = new AboutViewModel();
+        DataContext = new CategoriesViewModel();
     }
 }

@@ -1,0 +1,27 @@
+<Page x:Class="PasswordManagerWPF.MVVM.View.Menu.CategoriesView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:PasswordManagerWPF.MVVM.View.Menu"
+      mc:Ignorable="d"
+      Title="CategoriesView" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0" 
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <Button Margin="10" Content="Add Category"
+                    Command="{Binding AddCategoryCommand}"></Button>
+            <Button Margin="10" Content="Edit Category"
+                    Command="{Binding EditCategoryCommand}"></Button>
+            <Button Margin="10" Content="Remove Category"
+                    Command="{Binding RemoveCategoryCommand}"></Button>
+        </StackPanel>
+    </Grid>
+</Page>
