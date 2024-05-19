@@ -1,0 +1,34 @@
+<Page x:Class="PasswordManagerWPF.MVVM.View.Menu.Categories.EditCategoryView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:PasswordManagerWPF.MVVM.View.Menu.Categories"
+      mc:Ignorable="d"
+      Title="EditCategoryView" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="1"
+                   Width="400"
+                   Margin="10"
+                   Text="Edit a category name"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   TextAlignment="Center"
+                   FontSize="18"></TextBlock>
+        <TextBox Grid.Row="2"
+                 Width="400"
+                 Margin="10"
+                 Text="{Binding Category.Name}"></TextBox>
+        <Button Grid.Row="3"
+                Content="Edit category"
+                Command="{Binding EditCategoryCommand}" CommandParameter="{Binding Category}"></Button>
+    </Grid>
+</Page>

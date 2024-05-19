@@ -23,6 +23,8 @@ public class UserRepository : IRepository<User>
         return _instance;
     }
 
+    public static User CurrentUser { get; set; } = null!;
+
     private UserRepository(ApplicationContext context)
     {
         _context = context;
@@ -56,7 +58,7 @@ public class UserRepository : IRepository<User>
         return _context.Users.Find(id)!;
     }
     
-    public User? GetUserByLogin(string login)
+    public User GetUserByLogin(string login)
     {
         return _context.Users.FirstOrDefault(user => user.Login == login)!;
     }

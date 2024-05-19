@@ -1,14 +1,15 @@
 using System.Windows.Controls;
+using PasswordManagerWPF.MVVM.ViewModel;
 using PasswordManagerWPF.MVVM.ViewModel.Menu;
 
 namespace PasswordManagerWPF.MVVM.View.Menu;
 
-public partial class ImportExportPage : Page
+public partial class SettingsView : Page
 {
-    public ImportExportPage()
+    public SettingsView()
     {
         InitializeComponent();
         
-        DataContext = new ImportExportViewModel();
+        DataContext = new SettingsViewModel();
     }
 }

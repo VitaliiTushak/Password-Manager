@@ -1,11 +1,10 @@
 using System.Windows.Input;
 using PasswordManagerWPF.Core;
-using PasswordManagerWPF.MVVM.View.Menu;
 using PasswordManagerWPF.MVVM.ViewModel.Menu;
+using PasswordManagerWPF.Repositories;
 using PasswordManagerWPF.Repositories.RepositoryFactory;
 using PasswordManagerWPF.Services.Dialog;
 using PasswordManagerWPF.Services.Navigation;
-using PasswordManagerWPF.Utilities;
 using PasswordManagerWPF.Utilities.User;
 
 namespace PasswordManagerWPF.MVVM.ViewModel.Auth;
@@ -14,7 +13,6 @@ public class LoginViewModel : ObservableObject
 {
     private string _login = null!;
     private string _password = null!;
-    private string _repeatedPassword = null!;
 
     public string Login
     {
@@ -34,16 +32,8 @@ public class LoginViewModel : ObservableObject
             OnPropertyChanged(nameof(Password));
         }
     }
-    public string RepeatedPassword
-    {
-        get => _repeatedPassword;
-        set
-        {
-            _repeatedPassword = value;
-            OnPropertyChanged(nameof(RepeatedPassword));
-        }
-    }
 
+    private readonly UserRepository _userRepository;
     private readonly UserValidator _userValidator;
     private readonly INavigationService _navigationService = new CustomNavigationService();
     
@@ -52,9 +42,9 @@ public class LoginViewModel : ObservableObject
 
     public LoginViewModel()
     {
-        var userRepository = RepositoryFactory.GetInstance().GetUserRepository();
+        _userRepository = RepositoryFactory.GetInstance().GetUserRepository();
         IDialogService dialogService = new DialogService();
-        _userValidator = new UserValidator(userRepository, dialogService);
+        _userValidator = new UserValidator(_userRepository, dialogService);
         
         NavigateToRegistrationCommand = new RelayCommand(ExecuteNavigateToRegistration);
         LoginCommand = new RelayCommand(ExecuteLogin);
@@ -69,6 +59,8 @@ public class LoginViewModel : ObservableObject
     {
         if (_userValidator.ValidateLogin(Login, Password))
         {
+            var user = _userRepository.GetUserByLogin(Login);
+            UserRepository.CurrentUser = user;
             _navigationService.NavigateTo(new MenuViewModel());
         }
     }
