@@ -54,4 +54,9 @@ public class CategoryRepository : IRepository<Category>
     {
         return _context.Categories.Find(id)!;
     }
+
+    public object GetCategoryByName(string name)
+    {
+        return _context.Categories.FirstOrDefault(x => x.Name == name)!;
+    }
 }
