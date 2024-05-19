@@ -15,10 +15,7 @@ namespace PasswordManagerWPF.Commands.Category
 
         public void Execute()
         {
-            if (CanExecute())
-            {
-                categoryRepository.UpdateItem(category);
-            }
+            categoryRepository.UpdateItem(category);
         }
     }
 }

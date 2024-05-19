@@ -47,7 +47,7 @@ public class CategoryRepository : IRepository<Category>
 
     public List<Category> GetItems()
     {
-        return _context.Categories.ToList();
+        return _context.Categories.Where(category => category.UserId == UserRepository.CurrentUser.Id).ToList();
     }
 
     public Category GetItem(int id)

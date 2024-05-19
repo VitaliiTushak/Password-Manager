@@ -1,9 +1,10 @@
-<Page x:Class="PasswordManagerWPF.MVVM.View.Menu.CategoriesView"
+<Page x:Class="PasswordManagerWPF.MVVM.View.Menu.Categories.CategoriesView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:PasswordManagerWPF.MVVM.View.Menu"
+      xmlns:userControls="clr-namespace:PasswordManagerWPF.MVVM.View.UserControls"
       mc:Ignorable="d"
       Title="CategoriesView" Height="450" Width="800">
     <Grid>
@@ -17,11 +18,15 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
             <Button Margin="10" Content="Add Category"
-                    Command="{Binding AddCategoryCommand}"></Button>
-            <Button Margin="10" Content="Edit Category"
-                    Command="{Binding EditCategoryCommand}"></Button>
-            <Button Margin="10" Content="Remove Category"
-                    Command="{Binding RemoveCategoryCommand}"></Button>
+                    Command="{Binding NavigateAddCategoryCommand}"></Button>
         </StackPanel>
+        
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding Categories}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <userControls:CategoryElement DataContext="{Binding Category}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </Page>

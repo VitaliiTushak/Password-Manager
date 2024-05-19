@@ -14,10 +14,7 @@ namespace PasswordManagerWPF.Commands.Category
 
         public void Execute()
         {
-            if (CanExecute())
-            {
-                categoryRepository.RemoveItem(category);
-            }
+            categoryRepository.RemoveItem(category);
         }
     }
 }

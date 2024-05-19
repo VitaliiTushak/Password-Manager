@@ -1,37 +1,39 @@
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using PasswordManagerWPF.Core;
+using PasswordManagerWPF.MVVM.View.UserControls;
+using PasswordManagerWPF.Repositories.RepositoryFactory;
 using PasswordManagerWPF.Services.Navigation;
 
-namespace PasswordManagerWPF.MVVM.ViewModel.Menu;
+namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Categories;
 
 public class CategoriesViewModel : ObservableObject
 {
-    public ICommand AddCategoryCommand { get; set; }
-    public ICommand EditCategoryCommand { get; set; }
-    public ICommand DeleteCategoryCommand { get; set; }
+    public ObservableCollection<CategoryElement> Categories { get; set; }
+    public ICommand NavigateAddCategoryCommand { get; set; }
 
     private readonly INavigationService _navigationService;
-    
+
     public CategoriesViewModel()
     {
-        AddCategoryCommand = new RelayCommand(AddCategory);
-        EditCategoryCommand = new RelayCommand(EditCategory);
-        DeleteCategoryCommand = new RelayCommand(DeleteCategory);
+        NavigateAddCategoryCommand = new RelayCommand(AddCategory);
         
         _navigationService = new CustomNavigationService();
+        
+        var categoryRepository = RepositoryFactory.GetInstance().GetCategoryRepository();
+        
+        var categories = categoryRepository.GetItems();
+        var categoryElements = new ObservableCollection<CategoryElement>();
+        foreach (var category in categories)
+        {
+            categoryElements.Add(new CategoryElement(category));
+        }
+        
+        Categories = categoryElements;
     }
 
     private void AddCategory(object? obj)
     {
-    }
-
-    private void EditCategory(object? obj)
-    {
-        
-    }
-
-    private void DeleteCategory(object? obj)
-    {
-        
+        _navigationService.NavigateTo(new AddCategoryViewModel());
     }
 }

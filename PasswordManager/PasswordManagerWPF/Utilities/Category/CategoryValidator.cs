@@ -3,7 +3,7 @@ using PasswordManagerWPF.Services.Dialog;
 
 namespace PasswordManagerWPF.Utilities.Category;
 
-public class CategoryValidator(CategoryRepository categoryRepository, DialogService dialogService) : ICategoryValidator
+public class CategoryValidator(CategoryRepository categoryRepository, IDialogService dialogService) : ICategoryValidator
 {
     public bool IsCategoryNameValid(string name)
     {

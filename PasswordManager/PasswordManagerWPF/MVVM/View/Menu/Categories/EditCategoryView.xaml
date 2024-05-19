@@ -7,6 +7,28 @@
       mc:Ignorable="d"
       Title="EditCategoryView" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         
+        <TextBlock Grid.Row="1"
+                   Width="400"
+                   Margin="10"
+                   Text="Edit a category name"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   TextAlignment="Center"
+                   FontSize="18"></TextBlock>
+        <TextBox Grid.Row="2"
+                 Width="400"
+                 Margin="10"
+                 Text="{Binding Category.Name}"></TextBox>
+        <Button Grid.Row="3"
+                Content="Edit category"
+                Command="{Binding EditCategoryCommand}" CommandParameter="{Binding Category}"></Button>
     </Grid>
 </Page>

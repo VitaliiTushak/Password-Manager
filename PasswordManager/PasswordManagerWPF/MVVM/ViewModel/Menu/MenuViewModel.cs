@@ -1,6 +1,7 @@
 using System.Windows.Input;
 using PasswordManagerWPF.Core;
 using PasswordManagerWPF.MVVM.View.Menu;
+using PasswordManagerWPF.MVVM.ViewModel.Menu.Categories;
 using PasswordManagerWPF.Services.Navigation;
 
 namespace PasswordManagerWPF.MVVM.ViewModel.Menu;
@@ -29,16 +30,16 @@ public class MenuViewModel : ObservableObject
                     _navigationService.NavigateTo(new DashboardViewModel());
                     break;
                 case "Passwords":
-                    //_navigationService.NavigateTo(new PasswordsViewModel());
+                    _navigationService.NavigateTo(new PasswordsViewModel());
+                    break;
+                case "Categories":
+                    _navigationService.NavigateTo(new CategoriesViewModel());
                     break;
                 case "ImportExport":
-                    //_navigationService.NavigateTo(new ImportExportViewModel());
+                    _navigationService.NavigateTo(new ImportExportViewModel());
                     break;
-                case "Settings":
-                   // _navigationService.NavigateTo(new SettingsViewModel());
-                    break;
-                case "About":
-                    //_navigationService.NavigateTo(new AboutViewModel());
+                case "Settings": 
+                    _navigationService.NavigateTo(new SettingsViewModel());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(destination), destination, null);
