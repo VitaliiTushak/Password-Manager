@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PasswordManagerWPF.MVVM.View;
+using PasswordManagerWPF.MVVM.View.Auth;
 using PasswordManagerWPF.Utilities;
 
 namespace PasswordManagerWPF;

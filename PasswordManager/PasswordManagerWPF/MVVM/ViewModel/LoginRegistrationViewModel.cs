@@ -2,6 +2,8 @@ using System.Windows.Input;
 using PasswordManagerWPF.Core;
 using PasswordManagerWPF.MVVM.Model;
 using PasswordManagerWPF.MVVM.View;
+using PasswordManagerWPF.MVVM.View.Auth;
+using PasswordManagerWPF.MVVM.View.Menu;
 using PasswordManagerWPF.Repositories;
 using PasswordManagerWPF.Repositories.RepositoryFactory;
 using PasswordManagerWPF.Services.Dialog;
