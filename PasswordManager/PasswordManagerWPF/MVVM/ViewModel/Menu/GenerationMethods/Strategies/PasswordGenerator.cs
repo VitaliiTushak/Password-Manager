@@ -1,6 +1,4 @@
-using PasswordManagerWPF.MVVM.ViewModel.Menu.GenerationMethods.Strategies;
-
-namespace PasswordManagerWPF.MVVM.ViewModel.Menu.GenerationMethods;
+namespace PasswordManagerWPF.MVVM.ViewModel.Menu.GenerationMethods.Strategies;
 
 public class PasswordGenerator(IGenerationStrategy strategy)
 {
