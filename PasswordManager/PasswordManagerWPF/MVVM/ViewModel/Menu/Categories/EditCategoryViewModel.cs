@@ -1,9 +1,7 @@
-using System.Windows.Documents;
 using System.Windows.Input;
 using PasswordManagerWPF.Commands.Category;
 using PasswordManagerWPF.Core;
 using PasswordManagerWPF.MVVM.Model;
-using PasswordManagerWPF.Repositories;
 using PasswordManagerWPF.Repositories.RepositoryFactory;
 using PasswordManagerWPF.Services.Dialog;
 using PasswordManagerWPF.Services.Navigation;
@@ -28,7 +26,6 @@ public class EditCategoryViewModel : ObservableObject
     
     public ICommand EditCategoryCommand { get; }
 
-    private readonly CategoryRepository _categoryRepository;
     private readonly ICategoryValidator _categoryValidator;
     private readonly INavigationService _navigationService;
 
@@ -39,9 +36,9 @@ public class EditCategoryViewModel : ObservableObject
         
         EditCategoryCommand = new RelayCommand(EditCategoryCommandExecute);
 
-        _categoryRepository = RepositoryFactory.GetInstance().GetCategoryRepository();
+        var categoryRepository = RepositoryFactory.GetInstance().GetCategoryRepository();
         IDialogService dialogService = new DialogService();
-        _categoryValidator = new CategoryValidator(_categoryRepository, dialogService);
+        _categoryValidator = new CategoryValidator(categoryRepository, dialogService);
         _navigationService = new CustomNavigationService();
         
         Category = _staticCategory;
