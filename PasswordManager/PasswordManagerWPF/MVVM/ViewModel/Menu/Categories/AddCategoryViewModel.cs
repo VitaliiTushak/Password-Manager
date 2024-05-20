@@ -41,7 +41,7 @@ public class AddCategoryViewModel : ObservableObject
     
     private void AddCategoryCommandExecute(object? obj)
     {
-        var addCategoryCommand = new AddCategoryCommand(_categoryRepository, _categoryValidator, new Category(CategoryName, UserRepository.CurrentUser.Id));
+        var addCategoryCommand = new AddCategoryCommand(new Category(CategoryName, UserRepository.CurrentUser.Id));
         if (addCategoryCommand.CanExecute())
         {
             addCategoryCommand.Execute();

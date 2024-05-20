@@ -54,7 +54,8 @@ public class EditCategoryViewModel : ObservableObject
             var result = _categoryValidator.IsCategoryNameValid(category.Name);
             if (result)
             {
-                _categoryRepository.UpdateItem(category);
+                var editCategoryCommand = new EditCategoryCommand(category);
+                editCategoryCommand.Execute();
                 _navigationService.NavigateTo(new CategoriesViewModel());
             }
         }
