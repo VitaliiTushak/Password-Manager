@@ -10,7 +10,6 @@ public class ApplicationContext : DbContext
 
     public DbSet<User> Users { get; set; } = null!;
     public DbSet<Password> Passwords { get; set; } = null!;
-    public DbSet<SecurityMethod> SecurityMethods { get; set; } = null!;
     public DbSet<Category> Categories { get; set; } = null!;
     public ApplicationContext()
     {

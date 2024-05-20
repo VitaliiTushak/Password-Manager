@@ -48,7 +48,7 @@ public class CategoryElementViewModel : ObservableObject
         if (obj is Category category)
         {
             var repository = RepositoryFactory.GetInstance().GetCategoryRepository();
-            var deleteCategoryCommand = new DeleteCategoryCommand(repository, new CategoryValidator(repository, new DialogService()), category);
+            var deleteCategoryCommand = new DeleteCategoryCommand(category);
             if (deleteCategoryCommand.CanExecute())
             {
                 deleteCategoryCommand.Execute();

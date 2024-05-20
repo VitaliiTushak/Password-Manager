@@ -31,6 +31,5 @@ namespace PasswordManagerWPF.Repositories.RepositoryFactory
         public UserRepository GetUserRepository() => UserRepository.GetInstance(_context);
         public PasswordRepository GetPasswordRepository() => PasswordRepository.GetInstance(_context);
         public CategoryRepository GetCategoryRepository() => CategoryRepository.GetInstance(_context);
-        public SecurityMethodRepository GetSecurityMethodRepository() => SecurityMethodRepository.GetInstance(_context);
     }
 }
