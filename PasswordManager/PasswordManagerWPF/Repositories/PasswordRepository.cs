@@ -45,7 +45,7 @@ public class PasswordRepository : IRepository<Password>
 
     public List<Password> GetItems()
     {
-        throw new NotImplementedException();
+        return _context.Passwords.ToList();
     }
 
     public Password GetItem(int id)

@@ -17,23 +17,21 @@ public class CategoriesViewModel : ObservableObject
 
     public CategoriesViewModel()
     {
-        NavigateAddCategoryCommand = new RelayCommand(AddCategory);
+        NavigateAddCategoryCommand = new RelayCommand(NavigateAddCategoryExecution);
         
         _navigationService = new CustomNavigationService();
         
         var categoryRepository = RepositoryFactory.GetInstance().GetCategoryRepository();
         
         var categories = categoryRepository.GetItems();
-        var categoryElements = new ObservableCollection<CategoryElement>();
+        Categories = new ObservableCollection<CategoryElement>();
         foreach (var category in categories)
         {
-            categoryElements.Add(new CategoryElement(category));
+            Categories.Add(new CategoryElement(category));
         }
-        
-        Categories = categoryElements;
     }
 
-    private void AddCategory(object? obj)
+    private void NavigateAddCategoryExecution(object? obj)
     {
         _navigationService.NavigateTo(new AddCategoryViewModel());
     }
