@@ -3,12 +3,9 @@ using PasswordManagerWPF.Commands.Category;
 using PasswordManagerWPF.Core;
 using PasswordManagerWPF.MVVM.Model;
 using PasswordManagerWPF.MVVM.ViewModel.Menu.Categories;
-using PasswordManagerWPF.Repositories.RepositoryFactory;
-using PasswordManagerWPF.Services.Dialog;
 using PasswordManagerWPF.Services.Navigation;
-using PasswordManagerWPF.Utilities.Category;
 
-namespace PasswordManagerWPF.MVVM.View.UserControls;
+namespace PasswordManagerWPF.MVVM.ViewModel.UserControls.CategoryElement;
 
 public class CategoryElementViewModel : ObservableObject
 {
@@ -47,7 +44,6 @@ public class CategoryElementViewModel : ObservableObject
     {
         if (obj is Category category)
         {
-            var repository = RepositoryFactory.GetInstance().GetCategoryRepository();
             var deleteCategoryCommand = new DeleteCategoryCommand(category);
             if (deleteCategoryCommand.CanExecute())
             {

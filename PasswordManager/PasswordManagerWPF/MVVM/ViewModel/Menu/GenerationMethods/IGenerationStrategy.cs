@@ -1,4 +1,4 @@
-namespace PasswordManagerWPF.MVVM.ViewModel.Menu.GenerationMethods.Strategies;
+namespace PasswordManagerWPF.MVVM.ViewModel.Menu.GenerationMethods;
 
 public interface IGenerationStrategy
 {

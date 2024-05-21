@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
         
         <Border Grid.Column="0" Grid.Row="0" Height="40">
-            <TextBlock Text="Password Manager" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16" />
+            <TextBlock Text="Passwords Manager" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16" />
         </Border>
         
         <Grid Grid.Column="0" Grid.Row="1">

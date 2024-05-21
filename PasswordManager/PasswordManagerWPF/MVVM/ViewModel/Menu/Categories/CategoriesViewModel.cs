@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using PasswordManagerWPF.Core;
 using PasswordManagerWPF.MVVM.View.UserControls;
+using PasswordManagerWPF.MVVM.View.UserControls.CategoryElements;
 using PasswordManagerWPF.Repositories.RepositoryFactory;
 using PasswordManagerWPF.Services.Navigation;
 

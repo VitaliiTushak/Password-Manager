@@ -34,7 +34,7 @@ namespace PasswordManagerWPF.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("PasswordManagerWPF.MVVM.Model.Password", b =>
+            modelBuilder.Entity("PasswordManagerWPF.MVVM.Model.Passwords", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -69,7 +69,7 @@ namespace PasswordManagerWPF.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("Passwords")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

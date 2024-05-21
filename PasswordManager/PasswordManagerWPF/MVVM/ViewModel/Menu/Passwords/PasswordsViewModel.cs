@@ -1,7 +1,7 @@
 using System.Windows.Input;
 using PasswordManagerWPF.Core;
 
-namespace PasswordManagerWPF.MVVM.ViewModel.Menu;
+namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords;
 
 public class PasswordsViewModel : ObservableObject
 {
