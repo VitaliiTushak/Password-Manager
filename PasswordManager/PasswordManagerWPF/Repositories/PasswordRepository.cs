@@ -30,12 +30,14 @@ public class PasswordRepository : IRepository<Password>
     
     public void AddItem(Password item)
     {
-        throw new NotImplementedException();
+        _context.Passwords.Add(item);
+        _context.SaveChanges();
     }
 
     public void RemoveItem(Password item)
     {
-        throw new NotImplementedException();
+        _context.Passwords.Remove(item);
+        _context.SaveChanges();
     }
 
     public void UpdateItem(Password item)
@@ -50,6 +52,6 @@ public class PasswordRepository : IRepository<Password>
 
     public Password GetItem(int id)
     {
-        throw new NotImplementedException();
+        return _context.Passwords.Find(id)!;
     }
 }

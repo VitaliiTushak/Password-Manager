@@ -1,9 +1,11 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using PasswordManagerWPF.Commands.Passwords;
 using PasswordManagerWPF.Core;
 using PasswordManagerWPF.MVVM.Model;
 using PasswordManagerWPF.Repositories;
 using PasswordManagerWPF.Repositories.RepositoryFactory;
+using PasswordManagerWPF.Services.Navigation;
 
 namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords;
 
@@ -54,12 +56,16 @@ public class AddPasswordViewModel : ObservableObject
     private readonly CategoryRepository _categoryRepository;
     public ICommand AddPasswordCommand { get; set; }
     
+    private INavigationService _navigationService;
+    
     public AddPasswordViewModel()
     {
         AddPasswordCommand = new RelayCommand(AddPasswordCommandExecute);
 
         _categoryRepository = RepositoryFactory.GetInstance().GetCategoryRepository();
         Categories = new ObservableCollection<Category>(_categoryRepository.GetItems());
+
+        _navigationService = new CustomNavigationService();
     }
 
     private void AddPasswordCommandExecute(object? obj)
@@ -72,6 +78,11 @@ public class AddPasswordViewModel : ObservableObject
                 UserRepository.CurrentUser.Id, 
                 _categoryRepository.GetCategoryByName(SelectedCategory.Name).Id
                 );
+
+            var addPasswordCommand = new AddPasswordCommand(password);
+            addPasswordCommand.Execute();
+            
+            _navigationService.NavigateTo(new PasswordsViewModel());
         }
     }
 }
