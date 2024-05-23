@@ -1,11 +1,23 @@
 namespace PasswordManagerWPF.MVVM.Model
 {
-    public class Password(string name, string value, int userId, int categoryId)
+    public class Password
     {
         public int Id { get; set; }
-        public string Name { get; set; } = name;
-        public string Value { get; set; } = value;
-        public int UserId { get; set; } = userId;
-        public int CategoryId { get; set; } = categoryId;
+        public string Name { get; set; }
+        public string Value { get; set; }
+        public int UserId { get; set; }
+        public int CategoryId { get; set; }
+        
+        public Password()
+        {
+        }
+        
+        public Password(string name, string value, int userId, int categoryId)
+        {
+            Name = name;
+            Value = value;
+            UserId = userId;
+            CategoryId = categoryId;
+        }
     }
 }

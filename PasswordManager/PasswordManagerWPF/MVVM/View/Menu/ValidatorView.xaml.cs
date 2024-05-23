@@ -3,12 +3,11 @@ using PasswordManagerWPF.MVVM.ViewModel.Menu;
 
 namespace PasswordManagerWPF.MVVM.View.Menu;
 
-public partial class ImportExportView : Page
+public partial class ValidatorView : Page
 {
-    public ImportExportView()
+    public ValidatorView()
     {
         InitializeComponent();
-        
-        DataContext = new ImportExportViewModel();
+        DataContext = new ValidatorViewModel();
     }
 }

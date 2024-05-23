@@ -1,11 +1,11 @@
-<Page x:Class="PasswordManagerWPF.MVVM.View.Menu.ImportExportView"
+<Page x:Class="PasswordManagerWPF.MVVM.View.Menu.ValidatorView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:PasswordManagerWPF.MVVM.View.Menu"
       mc:Ignorable="d"
-      Title="ImportExportView" Height="450" Width="800">
+      Title="ValidatorView" Height="450" Width="800">
     <Grid>
         
     </Grid>

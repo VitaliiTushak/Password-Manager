@@ -1,0 +1,72 @@
+[
+  {
+    "Id": 45,
+    "Name": "Password1",
+    "Value": "p@ssw0rd1",
+    "UserId": 4,
+    "CategoryId": 2
+  },
+  {
+    "Id": 46,
+    "Name": "Password2",
+    "Value": "qwert!234",
+    "UserId": 4,
+    "CategoryId": 2
+  },
+  {
+    "Id": 47,
+    "Name": "Password3",
+    "Value": "Pass123!",
+    "UserId": 4,
+    "CategoryId": 3
+  },
+  {
+    "Id": 48,
+    "Name": "Password4",
+    "Value": "SecurePwd",
+    "UserId": 4,
+    "CategoryId": 3
+  },
+  {
+    "Id": 49,
+    "Name": "Password5",
+    "Value": "MyP@ssw0rd",
+    "UserId": 4,
+    "CategoryId": 2
+  },
+  {
+    "Id": 50,
+    "Name": "Password6",
+    "Value": "12345678",
+    "UserId": 4,
+    "CategoryId": 3
+  },
+  {
+    "Id": 51,
+    "Name": "Password7",
+    "Value": "StrongPwd123",
+    "UserId": 4,
+    "CategoryId": 3
+  },
+  {
+    "Id": 52,
+    "Name": "Password8",
+    "Value": "P@$$w0rd",
+    "UserId": 4,
+    "CategoryId": 2
+  },
+  {
+    "Id": 53,
+    "Name": "Password9",
+    "Value": "qwerty",
+    "UserId": 4,
+    "CategoryId": 3
+  },
+  {
+    "Id": 54,
+    "Name": "Password10",
+    "Value": "Password!123",
+    "UserId": 4,
+    "CategoryId": 2
+  }
+]

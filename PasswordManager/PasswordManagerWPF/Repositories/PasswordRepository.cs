@@ -48,11 +48,13 @@ public class PasswordRepository : IRepository<Password>
 
     public List<Password> GetItems()
     {
-        return _context.Passwords.ToList();
+        var userId = UserRepository.CurrentUser.Id;
+        return _context.Passwords.Where(password => password.UserId == userId).ToList();
     }
+
 
     public Password GetItem(int id)
     {
-        return _context.Passwords.Find(id)!;
+        return GetItems().Find(item => item.Id == id)!;
     }
 }
