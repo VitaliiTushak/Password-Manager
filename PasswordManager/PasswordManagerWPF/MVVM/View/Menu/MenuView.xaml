@@ -53,6 +53,13 @@
                     </TextBlock>
                 </Border>
                 <Border Height="40" BorderBrush="Black" BorderThickness="1">
+                    <TextBlock Text="Validator" Margin="10 0 0 0" VerticalAlignment="Center">
+                        <TextBlock.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding NavigateCommand}" CommandParameter="Validator" />
+                        </TextBlock.InputBindings>
+                    </TextBlock>
+                </Border>
+                <Border Height="40" BorderBrush="Black" BorderThickness="1">
                     <TextBlock Text="Settings" Margin="10 0 0 0" VerticalAlignment="Center">
                         <TextBlock.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding NavigateCommand}" CommandParameter="Settings" />

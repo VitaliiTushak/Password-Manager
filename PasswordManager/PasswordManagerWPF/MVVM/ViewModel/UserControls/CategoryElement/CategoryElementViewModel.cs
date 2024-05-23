@@ -44,7 +44,7 @@ public class CategoryElementViewModel : ObservableObject
     {
         if (obj is Category category)
         {
-            var deleteCategoryCommand = new DeleteCategoryCommand(category);
+            var deleteCategoryCommand = new DeleteCustomCommand(category);
             if (deleteCategoryCommand.CanExecute())
             {
                 deleteCategoryCommand.Execute();

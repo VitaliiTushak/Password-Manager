@@ -42,6 +42,9 @@ public class MenuViewModel : ObservableObject
                 case "Settings": 
                     _navigationService.NavigateTo(new SettingsViewModel());
                     break;
+                case "Validator":
+                    _navigationService.NavigateTo(new ValidatorViewModel());
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(destination), destination, null);
             }
