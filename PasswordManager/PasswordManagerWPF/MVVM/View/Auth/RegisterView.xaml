@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:PasswordManagerWPF.MVVM.View.Auth"
       mc:Ignorable="d"
-      Title="RegisterView" Height="450" Width="800">
+      Title="RegisterView">
     <Grid>
         
         <Grid.ColumnDefinitions>

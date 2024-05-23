@@ -23,25 +23,19 @@ public class AddCategoryViewModel : ObservableObject
         }
     }
     
-    public ICommand AddCategoryCommand { get; }
+    public ICommand AddCategoryCommand { get; set; }
 
-    private readonly CategoryRepository _categoryRepository;
-    private readonly ICategoryValidator _categoryValidator;
     private readonly INavigationService _navigationService;
 
     public AddCategoryViewModel()
     {
         AddCategoryCommand = new RelayCommand(AddCategoryCommandExecute);
-
-        _categoryRepository = RepositoryFactory.GetInstance().GetCategoryRepository();
-        IDialogService dialogService = new DialogService();
-        _categoryValidator = new CategoryValidator(_categoryRepository, dialogService);
         _navigationService = new CustomNavigationService();
     }
     
     private void AddCategoryCommandExecute(object? obj)
     {
-        var addCategoryCommand = new AddCategoryCommand(new Category(CategoryName, UserRepository.CurrentUser.Id));
+        var addCategoryCommand = new AddCustomCommand(new Category(CategoryName, UserRepository.CurrentUser.Id));
         if (addCategoryCommand.CanExecute())
         {
             addCategoryCommand.Execute();

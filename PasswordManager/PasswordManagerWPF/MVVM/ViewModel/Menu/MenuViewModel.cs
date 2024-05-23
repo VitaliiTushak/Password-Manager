@@ -2,6 +2,7 @@ using System.Windows.Input;
 using PasswordManagerWPF.Core;
 using PasswordManagerWPF.MVVM.View.Menu;
 using PasswordManagerWPF.MVVM.ViewModel.Menu.Categories;
+using PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords;
 using PasswordManagerWPF.Services.Navigation;
 
 namespace PasswordManagerWPF.MVVM.ViewModel.Menu;
@@ -40,6 +41,9 @@ public class MenuViewModel : ObservableObject
                     break;
                 case "Settings": 
                     _navigationService.NavigateTo(new SettingsViewModel());
+                    break;
+                case "Validator":
+                    _navigationService.NavigateTo(new ValidatorViewModel());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(destination), destination, null);

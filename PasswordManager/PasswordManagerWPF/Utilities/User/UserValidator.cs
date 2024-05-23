@@ -3,8 +3,7 @@ using PasswordManagerWPF.Services.Dialog;
 
 namespace PasswordManagerWPF.Utilities.User;
 
-public class UserValidator(UserRepository userRepository, IDialogService dialogService)
-    : IUserValidator
+public class UserValidator(UserRepository userRepository, IDialogService dialogService) : IUserValidator
     {
         public bool ValidateLogin(string login, string password)
         {
@@ -15,7 +14,7 @@ public class UserValidator(UserRepository userRepository, IDialogService dialogS
             }
 
             var user = userRepository.GetUserByLogin(login);
-            if (user == null)
+            if (user == null!)
             {
                 dialogService.ShowMessage("Такого користувача не існує", "Помилка", DialogType.Error);
                 return false;
@@ -43,14 +42,26 @@ public class UserValidator(UserRepository userRepository, IDialogService dialogS
                 dialogService.ShowMessage("Паролі не співпадають", "Помилка", DialogType.Error);
                 return false;
             }
+            
+            var user = userRepository.GetUserByLogin(login);
+            if (user != null!)
+            {
+                dialogService.ShowMessage("Користувач з таким логіном вже існує ", "Помилка", DialogType.Error);
+                return false;
+            }
 
-            if (!UserDataValidator.IsPasswordValid(password))
+            if (!IsPasswordValid(password))
             {
                 dialogService.ShowMessage("Пароль не відповідає вимогам безпеки", "Помилка", DialogType.Error);
                 return false;
             }
 
             return true;
+        }
+
+        private bool IsPasswordValid(string password)
+        {
+            return password.Length >= 8;
         }
     }
 
