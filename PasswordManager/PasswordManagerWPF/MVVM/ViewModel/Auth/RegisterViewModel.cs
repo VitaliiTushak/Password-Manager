@@ -3,7 +3,9 @@ using PasswordManagerWPF.Core;
 using PasswordManagerWPF.MVVM.Model;
 using PasswordManagerWPF.Repositories;
 using PasswordManagerWPF.Repositories.RepositoryFactory;
+using PasswordManagerWPF.Services.Dialog;
 using PasswordManagerWPF.Services.Navigation;
+using PasswordManagerWPF.Utilities.User;
 
 namespace PasswordManagerWPF.MVVM.ViewModel.Auth;
 
@@ -44,6 +46,7 @@ public class RegisterViewModel: ObservableObject
     public ICommand RegisterCommand { get; }
     
     private readonly UserRepository _userRepository;
+    private readonly UserValidator _userValidator;
     private readonly INavigationService _navigationService;
     public RegisterViewModel()
     {
@@ -51,11 +54,12 @@ public class RegisterViewModel: ObservableObject
 
         _navigationService = new CustomNavigationService();
         _userRepository = RepositoryFactory.GetInstance().GetUserRepository();
+        _userValidator = new UserValidator(_userRepository, new DialogService());
     }
     
     private void ExecuteRegister(object? obj)
     {
-        if (Password.Equals(RepeatedPassword))
+        if (_userValidator.ValidateRegistration(Login, Password, RepeatedPassword))
         {
             var user = new User(Login, Password);
             _userRepository.AddItem(user);

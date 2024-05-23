@@ -56,7 +56,7 @@ public class AddPasswordViewModel : ObservableObject
     private readonly CategoryRepository _categoryRepository;
     public ICommand AddPasswordCommand { get; set; }
     
-    private INavigationService _navigationService;
+    private readonly INavigationService _navigationService;
     
     public AddPasswordViewModel()
     {

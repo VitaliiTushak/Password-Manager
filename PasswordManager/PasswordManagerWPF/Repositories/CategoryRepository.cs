@@ -52,11 +52,11 @@ public class CategoryRepository : IRepository<Category>
 
     public Category GetItem(int id)
     {
-        return _context.Categories.Find(id)!;
+        return GetItems().FirstOrDefault(category => category.Id == id)!;
     }
 
     public Category GetCategoryByName(string name)
     {
-        return _context.Categories.FirstOrDefault(x => x.Name == name)!;
+        return GetItems().FirstOrDefault(x => x.Name == name)!;
     }
 }

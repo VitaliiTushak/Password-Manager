@@ -1,7 +1,9 @@
 using System.Windows.Input;
+using PasswordManagerWPF.Commands.Passwords;
 using PasswordManagerWPF.Core;
 using PasswordManagerWPF.MVVM.Model;
 using PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords;
+using PasswordManagerWPF.Repositories.RepositoryFactory;
 using PasswordManagerWPF.Services.Navigation;
 
 namespace PasswordManagerWPF.MVVM.ViewModel.UserControls.PasswordElement;
@@ -9,7 +11,9 @@ namespace PasswordManagerWPF.MVVM.ViewModel.UserControls.PasswordElement;
 public class PasswordElementViewModel : ObservableObject
 {
     private Password _password = null!;
+    private Category _category = null!;
     private string _maskedPassword = null!;
+    
     public Password Password
     {
         get => _password;
@@ -19,7 +23,15 @@ public class PasswordElementViewModel : ObservableObject
             OnPropertyChanged(nameof(Password));
         }
     }
-    
+    public Category Category
+    {
+        get => _category;
+        set
+        {
+            _category = value;
+            OnPropertyChanged(nameof(Category));
+        }
+    }
     public string MaskedPassword
     {
         get => _maskedPassword;
@@ -30,8 +42,8 @@ public class PasswordElementViewModel : ObservableObject
         }
     }
     
-    public ICommand NavigateEditCategoryCommand { get; set; }
-    public ICommand NavigateDeleteCategoryCommand { get; set; }
+    public ICommand NavigateEditPasswordCommand { get; set; }
+    public ICommand NavigateDeletePasswordCommand { get; set; }
     
     private readonly INavigationService _navigationService;
     
@@ -39,30 +51,31 @@ public class PasswordElementViewModel : ObservableObject
     {
         Password = password;
         MaskedPassword = new string('*', password.Value.Length);
+        var categoryRepository = RepositoryFactory.GetInstance().GetCategoryRepository();
+        Category = categoryRepository.GetItem(password.CategoryId);
         
         _navigationService = new CustomNavigationService();
         
-        NavigateEditCategoryCommand = new RelayCommand(EditCategory);
-        NavigateDeleteCategoryCommand = new RelayCommand(DeleteCategory);
+        NavigateEditPasswordCommand = new RelayCommand(EditPassword);
+        NavigateDeletePasswordCommand = new RelayCommand(DeletePassword);
     }
     
-    private void EditCategory(object? obj)
+    private void EditPassword(object? obj)
     {
         if (obj is Password password)
             _navigationService.NavigateTo(new EditPasswordViewModel(password));
-        
     }
 
-    private void DeleteCategory(object? obj)
+    private void DeletePassword(object? obj)
     {
         if (obj is Password password)
         {
-           /* var deleteCategoryCommand = new DeletePasswordCommand(category);
+            var deleteCategoryCommand = new DeletePasswordCommand(password);
             if (deleteCategoryCommand.CanExecute())
             {
                 deleteCategoryCommand.Execute();
                 _navigationService.NavigateTo(new PasswordsViewModel());
-            }*/
+            }
         }
     }
 }

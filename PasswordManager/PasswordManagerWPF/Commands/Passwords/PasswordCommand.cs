@@ -10,4 +10,5 @@ public abstract class PasswordCommand(Password password)
     protected readonly PasswordRepository PasswordRepository = RepositoryFactory.GetInstance().GetPasswordRepository();
 
     public abstract void Execute();
+    public virtual bool CanExecute() => true;
 }

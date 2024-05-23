@@ -42,7 +42,8 @@ public class PasswordRepository : IRepository<Password>
 
     public void UpdateItem(Password item)
     {
-        throw new NotImplementedException();
+        _context.Passwords.Update(item);
+        _context.SaveChanges();
     }
 
     public List<Password> GetItems()
