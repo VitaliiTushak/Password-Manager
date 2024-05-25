@@ -4,6 +4,7 @@ using PasswordManagerWPF.MVVM.View.Menu;
 using PasswordManagerWPF.MVVM.ViewModel.Menu.Categories;
 using PasswordManagerWPF.MVVM.ViewModel.Menu.ImportAndExport;
 using PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords;
+using PasswordManagerWPF.MVVM.ViewModel.Menu.Validator;
 using PasswordManagerWPF.Services.Navigation;
 
 namespace PasswordManagerWPF.MVVM.ViewModel.Menu;
@@ -39,9 +40,6 @@ public class MenuViewModel : ObservableObject
                     break;
                 case "ImportExport":
                     _navigationService.NavigateTo(new ImportExportViewModel());
-                    break;
-                case "Settings": 
-                    _navigationService.NavigateTo(new SettingsViewModel());
                     break;
                 case "Validator":
                     _navigationService.NavigateTo(new ValidatorViewModel());
