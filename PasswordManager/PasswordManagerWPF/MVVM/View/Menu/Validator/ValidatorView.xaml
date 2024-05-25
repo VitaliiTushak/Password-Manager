@@ -1,0 +1,80 @@
+<Page x:Class="PasswordManagerWPF.MVVM.View.Menu.Validator.ValidatorView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:PasswordManagerWPF.MVVM.View.Menu"
+      xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+      xmlns:utilities="clr-namespace:PasswordManagerWPF.Utilities"
+      mc:Ignorable="d"
+      Title="ValidatorView" Height="450" Width="800">
+    <Page.Resources>
+        <utilities:RangeToColorConverter x:Key="RangeToColorConverter"/>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="120"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="Enter your password to validate"
+                       VerticalAlignment="Center"
+                       TextAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Height="40"></TextBlock>
+            <TextBox Text="{Binding Password}"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     Width="400"
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Center"></TextBox>
+            <Button Margin="0 10"
+                    Content="Validate"
+                    Command="{Binding ValidatePasswordCommand}"
+                    CommandParameter="{Binding Password}"></Button>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="40">
+            <GroupBox>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Row="0" 
+                               Grid.Column="0"
+                               Text="Messages:"></TextBlock>
+                    <TextBlock Grid.Column="1" 
+                               Grid.Row="0"
+                               Text="{Binding ValidationMessages}"></TextBlock>
+                    
+                    <TextBlock Grid.Row="1" 
+                               Grid.Column="0"
+                               Text="Security:"></TextBlock>
+                    <ProgressBar Grid.Row="1" Grid.Column="1" 
+                                 Value="{Binding ProgressValue}" 
+                                 Minimum="0" 
+                                 Maximum="100"
+                                 Height="30"
+                                 Width="300">
+                        <ProgressBar.Foreground>
+                            <SolidColorBrush Color="{Binding ProgressValue, Converter={StaticResource RangeToColorConverter}}"/>
+                        </ProgressBar.Foreground>
+                    </ProgressBar>
+                </Grid>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</Page>
