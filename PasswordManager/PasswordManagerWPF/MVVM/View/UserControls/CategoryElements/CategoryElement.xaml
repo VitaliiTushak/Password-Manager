@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:PasswordManagerWPF.MVVM.View.UserControls"
-             mc:Ignorable="d" Height="60" Width="300" HorizontalAlignment="Center">
+             mc:Ignorable="d" Height="60" Width="1500" Margin="30 0" HorizontalAlignment="Center">
     <Grid>
         <Border BorderBrush="Black" BorderThickness="1">
             <Grid>
@@ -14,6 +14,7 @@
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
+                
                 <Border Grid.Column="0">
                     <TextBlock Text="{Binding Category.Name}"
                                VerticalAlignment="Center"
@@ -27,6 +28,7 @@
                     <Button Content="Delete"
                             Command="{Binding NavigateDeleteCategoryCommand}" CommandParameter="{Binding Category}"></Button>
                 </Border>
+                
             </Grid>
         </Border>
     </Grid>

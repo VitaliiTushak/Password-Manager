@@ -20,7 +20,7 @@ public class MenuViewModel : ObservableObject
     {
         NavigateCommand = new RelayCommand(NavigationExecute);
         _navigationService = new CustomNavigationService();
-        _navigationService.NavigateTo(new DashboardViewModel());
+        _navigationService.NavigateTo(new ValidatorViewModel());
     }
 
     private void NavigationExecute(object? obj)
@@ -29,9 +29,6 @@ public class MenuViewModel : ObservableObject
         {
             switch (destination)
             {
-                case "Dashboard":
-                    _navigationService.NavigateTo(new DashboardViewModel());
-                    break;
                 case "Passwords":
                     _navigationService.NavigateTo(new PasswordsViewModel());
                     break;

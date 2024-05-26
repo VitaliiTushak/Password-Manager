@@ -17,12 +17,11 @@
         
         <TextBlock Grid.Row="1"
                    Width="400"
-                   Margin="10"
+                   Margin="0 0 0 -20"
                    Text="Enter a category name"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
                    TextAlignment="Center"
-                   FontSize="18"></TextBlock>
+                   FontSize="18"
+                   Style="{StaticResource MiniTitle}"></TextBlock>
         <TextBox Grid.Row="2"
                  Width="400"
                  Margin="10"

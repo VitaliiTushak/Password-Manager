@@ -17,7 +17,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.ImportAndExport
 {
     public class ImportExportViewModel : ObservableObject
     {
-        private readonly PasswordRepository _passwordRepository;
+        private readonly PasswordRepositoryDecorator _passwordRepository;
         private readonly IDialogService _dialogService;
         private INavigationService _navigationService;
 
@@ -26,7 +26,8 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.ImportAndExport
 
         public ImportExportViewModel()
         {
-            _passwordRepository = RepositoryFactory.GetInstance().GetPasswordRepository();
+            _passwordRepository =
+                new PasswordRepositoryDecorator(RepositoryFactory.GetInstance().GetPasswordRepository());
             _dialogService = new DialogService();
             _navigationService = new CustomNavigationService();
 

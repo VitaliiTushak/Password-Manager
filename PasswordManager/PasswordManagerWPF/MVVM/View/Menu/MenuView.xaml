@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:PasswordManagerWPF.MVVM.View.Menu"
       xmlns:viewModels="clr-namespace:PasswordManagerWPF.MVVM.ViewModel.Menu"
       xmlns:views="clr-namespace:PasswordManagerWPF.MVVM.View.Menu"
-      mc:Ignorable="d" Height="900" Width="1480">
+      mc:Ignorable="d" Height="1000" Width="1840" Background="Transparent">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
@@ -19,79 +19,25 @@
         
         <Border Grid.Column="0" Grid.Row="0" Height="40">
             <TextBlock Text="Passwords Manager" 
-                       VerticalAlignment="Center" 
-                       HorizontalAlignment="Center" 
-                       FontWeight="Bold" 
-                       FontSize="16" />
+                       VerticalAlignment="Center"
+                       FontSize="20"
+                       Style="{StaticResource Title}" />
         </Border>
         
         <Grid Grid.Column="0" Grid.Row="1">
             <StackPanel Orientation="Vertical">
-                <Border Height="40" 
-                        BorderBrush="Black" 
-                        BorderThickness="1">
-                    <TextBlock Text="Dashboard" 
-                               Margin="10 0 0 0" 
-                               VerticalAlignment="Center">
-                        <TextBlock.InputBindings>
-                            <MouseBinding Gesture="LeftClick" 
-                                          Command="{Binding NavigateCommand}" 
-                                          CommandParameter="Dashboard" />
-                        </TextBlock.InputBindings>
-                    </TextBlock>
-                </Border>
-                <Border Height="40" 
-                        BorderBrush="Black" 
-                        BorderThickness="1">
-                    <TextBlock Text="Passwords" 
-                               Margin="10 0 0 0" 
-                               VerticalAlignment="Center">
-                        <TextBlock.InputBindings>
-                            <MouseBinding Gesture="LeftClick" 
-                                          Command="{Binding NavigateCommand}" 
-                                          CommandParameter="Passwords" />
-                        </TextBlock.InputBindings>
-                    </TextBlock>
-                </Border>
-                <Border Height="40" 
-                        BorderBrush="Black" 
-                        BorderThickness="1">
-                    <TextBlock Text="Categories" 
-                               Margin="10 0 0 0" 
-                               VerticalAlignment="Center">
-                        <TextBlock.InputBindings>
-                            <MouseBinding Gesture="LeftClick" 
-                                          Command="{Binding NavigateCommand}" 
-                                          CommandParameter="Categories" />
-                        </TextBlock.InputBindings>
-                    </TextBlock>
-                </Border>
-                <Border Height="40" 
-                        BorderBrush="Black" 
-                        BorderThickness="1">
-                    <TextBlock Text="Import/Export" 
-                               Margin="10 0 0 0" 
-                               VerticalAlignment="Center">
-                        <TextBlock.InputBindings>
-                            <MouseBinding Gesture="LeftClick" 
-                                          Command="{Binding NavigateCommand}" 
-                                          CommandParameter="ImportExport" />
-                        </TextBlock.InputBindings>
-                    </TextBlock>
-                </Border>
-                <Border Height="40" 
-                        BorderBrush="Black" 
-                        BorderThickness="1">
-                    <TextBlock Text="Validator" 
-                               Margin="10 0 0 0" 
-                               VerticalAlignment="Center">
-                        <TextBlock.InputBindings>
-                            <MouseBinding Gesture="LeftClick" 
-                                          Command="{Binding NavigateCommand}" 
-                                          CommandParameter="Validator" />
-                        </TextBlock.InputBindings>
-                    </TextBlock>
-                </Border>
+                <RadioButton GroupName="NavigationGroup" Command="{Binding NavigateCommand}" CommandParameter="Passwords">
+                    <TextBlock Text="Passwords" Style="{StaticResource MiniTitle}"/>
+                </RadioButton>
+                <RadioButton GroupName="NavigationGroup" Command="{Binding NavigateCommand}" CommandParameter="Categories">
+                    <TextBlock Text="Categories" Style="{StaticResource MiniTitle}"/>
+                </RadioButton>
+                <RadioButton GroupName="NavigationGroup" Command="{Binding NavigateCommand}" CommandParameter="ImportExport">
+                    <TextBlock Text="Import/Export" Style="{StaticResource MiniTitle}"/>
+                </RadioButton>
+                <RadioButton GroupName="NavigationGroup" Command="{Binding NavigateCommand}" CommandParameter="Validator">
+                    <TextBlock Text="Validator" Style="{StaticResource MiniTitle}"/>
+                </RadioButton>
             </StackPanel>
         </Grid>
 
