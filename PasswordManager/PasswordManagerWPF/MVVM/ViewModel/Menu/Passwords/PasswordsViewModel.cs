@@ -26,7 +26,8 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords
 
             _categoryRepository = RepositoryFactory.GetInstance().GetCategoryRepository();
 
-            var passwordRepository = RepositoryFactory.GetInstance().GetPasswordRepository();
+            var passwordRepository =
+                new PasswordRepositoryDecorator(RepositoryFactory.GetInstance().GetPasswordRepository());
             var allPasswords = passwordRepository.GetItems();
             
             Passwords = new ObservableCollection<PasswordElement>(allPasswords.Select(p => new PasswordElement(p)));

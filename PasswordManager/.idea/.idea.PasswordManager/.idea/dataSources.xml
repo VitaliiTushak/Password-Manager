@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="PasswordManagerDatabase" uuid="522e39f3-8b84-416b-aebf-2a5ac0beef8f">
+    <data-source source="LOCAL" name="PasswordManagerDatabase" uuid="6c893d58-80b6-4bbc-9e48-5ff01eadb44a">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>

@@ -7,7 +7,7 @@
       xmlns:sys="clr-namespace:System;assembly=System.Runtime"
       xmlns:utilities="clr-namespace:PasswordManagerWPF.Utilities"
       mc:Ignorable="d"
-      Title="ValidatorView" Height="450" Width="800">
+      Title="ValidatorView" Height="450" Width="800" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Top">
     <Page.Resources>
         <utilities:RangeToColorConverter x:Key="RangeToColorConverter"/>
     </Page.Resources>
@@ -25,10 +25,8 @@
         
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBlock Text="Enter your password to validate"
-                       VerticalAlignment="Center"
                        TextAlignment="Center"
-                       HorizontalAlignment="Center"
-                       Height="40"></TextBlock>
+                       Height="40" Style="{StaticResource MiniTitle}"/>
             <TextBox Text="{Binding Password}"
                      VerticalAlignment="Center"
                      HorizontalAlignment="Center"
@@ -41,8 +39,8 @@
                     CommandParameter="{Binding Password}"></Button>
         </StackPanel>
         
-        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="40">
-            <GroupBox>
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3" Margin="40">
+            <GroupBox Height="120" Margin="0 100 0 0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"/>
@@ -55,14 +53,17 @@
                     
                     <TextBlock Grid.Row="0" 
                                Grid.Column="0"
-                               Text="Messages:"></TextBlock>
+                               Text="Messages:"
+                               Style="{StaticResource MiniTitle}"></TextBlock>
                     <TextBlock Grid.Column="1" 
                                Grid.Row="0"
-                               Text="{Binding ValidationMessages}"></TextBlock>
+                               Text="{Binding ValidationMessages}"
+                               Style="{StaticResource Text}"></TextBlock>
                     
                     <TextBlock Grid.Row="1" 
                                Grid.Column="0"
-                               Text="Security:"></TextBlock>
+                               Text="Security:"
+                               Style="{StaticResource MiniTitle}"></TextBlock>
                     <ProgressBar Grid.Row="1" Grid.Column="1" 
                                  Value="{Binding ProgressValue}" 
                                  Minimum="0" 
