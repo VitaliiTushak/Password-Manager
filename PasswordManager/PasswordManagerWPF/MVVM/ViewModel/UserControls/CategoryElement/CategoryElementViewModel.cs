@@ -1,5 +1,5 @@
 using System.Windows.Input;
-using PasswordManagerWPF.Commands.Category;
+using PasswordManagerWPF.Commands.CategoryCommands;
 using PasswordManagerWPF.Core;
 using PasswordManagerWPF.MVVM.Model;
 using PasswordManagerWPF.MVVM.ViewModel.Menu.Categories;
@@ -9,6 +9,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.UserControls.CategoryElement;
 
 public class CategoryElementViewModel : ObservableObject
 {
+    //Observable Properties
     private Category _category = null!;
     public Category Category
     {
@@ -20,10 +21,12 @@ public class CategoryElementViewModel : ObservableObject
         }
     }
     
+    //Fields
+    private readonly INavigationService _navigationService;
+    
+    //Commands
     public ICommand NavigateEditCategoryCommand { get; set; }
     public ICommand NavigateDeleteCategoryCommand { get; set; }
-    
-    private readonly INavigationService _navigationService;
     public CategoryElementViewModel(Category category)
     {
         Category = category;
@@ -33,18 +36,18 @@ public class CategoryElementViewModel : ObservableObject
         NavigateDeleteCategoryCommand = new RelayCommand(DeleteCategory);
     }
     
+    //Command Handlers
     private void EditCategory(object? obj)
     {
         if (obj is Category category)
             _navigationService.NavigateTo(new EditCategoryViewModel(category));
-        
     }
 
     private void DeleteCategory(object? obj)
     {
         if (obj is Category category)
         {
-            var deleteCategoryCommand = new DeleteCustomCommand(category);
+            var deleteCategoryCommand = new DeleteCategoryCommand(category);
             if (deleteCategoryCommand.CanExecute())
             {
                 deleteCategoryCommand.Execute();

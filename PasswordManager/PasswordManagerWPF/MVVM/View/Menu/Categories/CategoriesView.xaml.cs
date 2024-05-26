@@ -1,5 +1,4 @@
 using System.Windows.Controls;
-using PasswordManagerWPF.MVVM.ViewModel.Menu;
 using PasswordManagerWPF.MVVM.ViewModel.Menu.Categories;
 
 namespace PasswordManagerWPF.MVVM.View.Menu.Categories;

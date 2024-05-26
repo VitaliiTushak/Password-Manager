@@ -2,7 +2,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.GenerationMethods.Strategies;
 
 public class PronounceablePasswordGenerationStrategy : IGenerationStrategy
 {
-    private readonly Random _random = new Random();
+    private readonly Random _random = new();
     private const string Vowels = "aeiou";
     private const string Consonants = "bcdfghjklmnpqrstvwxyz";
 

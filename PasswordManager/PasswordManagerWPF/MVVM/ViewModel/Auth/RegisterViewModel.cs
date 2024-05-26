@@ -11,6 +11,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Auth;
 
 public class RegisterViewModel: ObservableObject
 {
+    //Observable Properties
     private string _login = null!;
     private string _password = null!;
     private string _repeatedPassword = null!;
@@ -43,11 +44,13 @@ public class RegisterViewModel: ObservableObject
         }
     }  
     
-    public ICommand RegisterCommand { get; }
-    
+    //Fields
     private readonly UserRepository _userRepository;
     private readonly UserValidator _userValidator;
     private readonly INavigationService _navigationService;
+    
+    //Commands
+    public ICommand RegisterCommand { get; }
     public RegisterViewModel()
     {
         RegisterCommand = new RelayCommand(ExecuteRegister);
@@ -57,6 +60,7 @@ public class RegisterViewModel: ObservableObject
         _userValidator = new UserValidator(_userRepository, new DialogService());
     }
     
+    //Command Handlers
     private void ExecuteRegister(object? obj)
     {
         if (_userValidator.ValidateRegistration(Login, Password, RepeatedPassword))

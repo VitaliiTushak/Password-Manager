@@ -16,7 +16,7 @@ namespace PasswordManagerWPF.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0-preview.3.24172.4");
 
-            modelBuilder.Entity("PasswordManagerWPF.MVVM.Model.Category", b =>
+            modelBuilder.Entity("PasswordManagerWPF.MVVM.Model.CategoryCommands", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

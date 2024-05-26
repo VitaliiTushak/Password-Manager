@@ -3,12 +3,12 @@ using System.IO;
 using CsvHelper;
 using CsvHelper.Configuration;
 using PasswordManagerWPF.MVVM.Model;
-using PasswordManagerWPF.MVVM.ViewModel.Menu.ImportAndExport.Strategies;
 
 namespace PasswordManagerWPF.MVVM.ViewModel.Menu.ImportAndExport.Strategy.Strategies
 {
     public class CsvPasswordImportExportStrategy : IPasswordImportExportStrategy
     {
+
         public void ExportPasswords(string filePath, IEnumerable<Password> passwords)
         {
             using (var writer = new StreamWriter(filePath))

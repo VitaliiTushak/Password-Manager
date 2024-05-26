@@ -2,7 +2,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.GenerationMethods.Strategies;
 
 public class AlphanumericPasswordGenerationStrategy : IGenerationStrategy
 {
-    private readonly Random _random = new Random();
+    private readonly Random _random = new();
 
     public string GeneratePassword(int length)
     {

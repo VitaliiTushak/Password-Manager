@@ -1,6 +1,6 @@
 using PasswordManagerWPF.MVVM.Model;
 
-namespace PasswordManagerWPF.Commands.Passwords;
+namespace PasswordManagerWPF.Commands.PasswordCommands;
 
 public class EditPasswordCommand(Password password) : PasswordCommand(password)
 {

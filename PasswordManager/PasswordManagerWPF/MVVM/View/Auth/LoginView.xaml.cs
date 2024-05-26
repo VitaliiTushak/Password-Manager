@@ -1,5 +1,4 @@
 using System.Windows.Controls;
-using PasswordManagerWPF.MVVM.ViewModel;
 using PasswordManagerWPF.MVVM.ViewModel.Auth;
 
 namespace PasswordManagerWPF.MVVM.View.Auth;

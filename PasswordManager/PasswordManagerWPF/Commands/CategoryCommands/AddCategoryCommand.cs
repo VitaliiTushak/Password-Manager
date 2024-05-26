@@ -1,6 +1,8 @@
-namespace PasswordManagerWPF.Commands.Category;
+using PasswordManagerWPF.MVVM.Model;
 
-public class AddCustomCommand(MVVM.Model.Category category) : CategoryCommand(category)
+namespace PasswordManagerWPF.Commands.CategoryCommands;
+
+public class AddCategoryCommand(Category category) : CategoryCommand(category)
 {
     public override bool CanExecute()
     {

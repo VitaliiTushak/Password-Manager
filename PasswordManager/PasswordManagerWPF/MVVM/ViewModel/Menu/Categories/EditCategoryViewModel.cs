@@ -1,5 +1,5 @@
 using System.Windows.Input;
-using PasswordManagerWPF.Commands.Category;
+using PasswordManagerWPF.Commands.CategoryCommands;
 using PasswordManagerWPF.Core;
 using PasswordManagerWPF.MVVM.Model;
 using PasswordManagerWPF.Repositories.RepositoryFactory;
@@ -11,6 +11,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Categories;
 
 public class EditCategoryViewModel : ObservableObject
 {
+    //Observable Properties
     private Category _category = null!;
     public Category Category
     {
@@ -22,12 +23,14 @@ public class EditCategoryViewModel : ObservableObject
         }
     }
     
-    private static Category _staticCategory = null!;
     
-    public ICommand EditCategoryCommand { get; }
-
+    //Fields
+    private static Category _staticCategory = null!;
     private readonly ICategoryValidator _categoryValidator;
     private readonly INavigationService _navigationService;
+    
+    //Commands
+    public ICommand EditCategoryCommand { get; set; }
 
     public EditCategoryViewModel(Category category = null!)
     {
@@ -44,6 +47,7 @@ public class EditCategoryViewModel : ObservableObject
         Category = _staticCategory;
     }
 
+    //Command Handlers
     private void EditCategoryCommandExecute(object? obj)
     {
         if (obj is Category category)
@@ -51,7 +55,7 @@ public class EditCategoryViewModel : ObservableObject
             var result = _categoryValidator.IsCategoryNameValid(category.Name);
             if (result)
             {
-                var editCategoryCommand = new EditCustomCommand(category);
+                var editCategoryCommand = new EditCategoryCommand(category);
                 editCategoryCommand.Execute();
                 _navigationService.NavigateTo(new CategoriesViewModel());
             }

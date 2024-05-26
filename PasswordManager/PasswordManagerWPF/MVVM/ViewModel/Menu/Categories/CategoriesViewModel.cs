@@ -1,7 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using PasswordManagerWPF.Core;
-using PasswordManagerWPF.MVVM.View.UserControls;
 using PasswordManagerWPF.MVVM.View.UserControls.CategoryElements;
 using PasswordManagerWPF.Repositories.RepositoryFactory;
 using PasswordManagerWPF.Services.Navigation;
@@ -10,10 +9,14 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Categories;
 
 public class CategoriesViewModel : ObservableObject
 {
+    //Observable Properties
     public ObservableCollection<CategoryElement> Categories { get; set; }
-    public ICommand NavigateAddCategoryCommand { get; set; }
-
+    
+    //Fields
     private readonly INavigationService _navigationService;
+    
+    //Commands
+    public ICommand NavigateAddCategoryCommand { get; set; }
 
     public CategoriesViewModel()
     {
@@ -31,6 +34,7 @@ public class CategoriesViewModel : ObservableObject
         }
     }
 
+    //Command Handlers
     private void NavigateAddCategoryExecution(object? obj)
     {
         _navigationService.NavigateTo(new AddCategoryViewModel());

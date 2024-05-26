@@ -1,5 +1,5 @@
 using System.Windows.Input;
-using PasswordManagerWPF.Commands.Passwords;
+using PasswordManagerWPF.Commands.PasswordCommands;
 using PasswordManagerWPF.Core;
 using PasswordManagerWPF.MVVM.Model;
 using PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords;
@@ -10,6 +10,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.UserControls.PasswordElement;
 
 public class PasswordElementViewModel : ObservableObject
 {
+    //Observable Properties
     private Password _password = null!;
     private Category _category = null!;
     private string _maskedPassword = null!;
@@ -42,10 +43,12 @@ public class PasswordElementViewModel : ObservableObject
         }
     }
     
+    //Fields
+    private readonly INavigationService _navigationService;
+    
+    //Commands
     public ICommand NavigateEditPasswordCommand { get; set; }
     public ICommand NavigateDeletePasswordCommand { get; set; }
-    
-    private readonly INavigationService _navigationService;
     
     public PasswordElementViewModel(Password password)
     {
@@ -60,6 +63,7 @@ public class PasswordElementViewModel : ObservableObject
         NavigateDeletePasswordCommand = new RelayCommand(DeletePassword);
     }
     
+    //Command Handlers
     private void EditPassword(object? obj)
     {
         if (obj is Password password)

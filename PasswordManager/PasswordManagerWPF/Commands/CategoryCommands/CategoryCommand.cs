@@ -1,17 +1,18 @@
+using PasswordManagerWPF.MVVM.Model;
 using PasswordManagerWPF.Repositories;
 using PasswordManagerWPF.Repositories.RepositoryFactory;
 using PasswordManagerWPF.Services.Dialog;
 using PasswordManagerWPF.Utilities.Category;
 
-namespace PasswordManagerWPF.Commands.Category
+namespace PasswordManagerWPF.Commands.CategoryCommands
 {
     public abstract class CategoryCommand
     {
-        protected readonly MVVM.Model.Category Category;
+        protected readonly Category Category;
         protected readonly CategoryRepository CategoryRepository;
         protected readonly CategoryValidator CategoryValidator;
 
-        protected CategoryCommand(MVVM.Model.Category category)
+        protected CategoryCommand(Category category)
         {
             Category = category;
             CategoryRepository = RepositoryFactory.GetInstance().GetCategoryRepository();

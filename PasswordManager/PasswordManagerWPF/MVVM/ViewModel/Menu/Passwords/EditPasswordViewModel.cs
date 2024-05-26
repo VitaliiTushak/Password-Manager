@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using PasswordManagerWPF.Commands.Passwords;
+using PasswordManagerWPF.Commands.PasswordCommands;
 using PasswordManagerWPF.Core;
 using PasswordManagerWPF.MVVM.Model;
 using PasswordManagerWPF.Repositories.RepositoryFactory;
@@ -10,6 +10,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords
 {
     public class EditPasswordViewModel : ObservableObject
     {
+        //Observable Properties
         private Category _selectedCategory = null!;
         private Password _password = null!;
 
@@ -37,12 +38,15 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords
                 }
             }
         }
-
         public ObservableCollection<Category> Categories { get; set; }
-        public ICommand EditPasswordCommand { get; set; }
 
+        //Fields
         private readonly INavigationService _navigationService;
         private static Password _staticPassword = null!;
+        
+        
+        //Commands
+        public ICommand EditPasswordCommand { get; set; }
 
         public EditPasswordViewModel(Password password = null!)
         {
@@ -62,6 +66,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords
             _navigationService = new CustomNavigationService();
         }
 
+        //Command Handlers
         private void EditPasswordCommandExecute(object? obj)
         {
             if (obj is Password password)

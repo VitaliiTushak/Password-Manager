@@ -11,10 +11,11 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu;
 
 public class MenuViewModel : ObservableObject
 {
-    public ICommand NavigateCommand { get; }
-    
+    //Fields
     private readonly INavigationService _navigationService;
     
+    //Commands
+    public ICommand NavigateCommand { get; set; }
     
     public MenuViewModel()
     {
@@ -23,6 +24,7 @@ public class MenuViewModel : ObservableObject
         _navigationService.NavigateTo(new ValidatorViewModel());
     }
 
+    //Command Handlers
     private void NavigationExecute(object? obj)
     {
         if (obj is string destination)
@@ -46,5 +48,4 @@ public class MenuViewModel : ObservableObject
             }
         }
     }
-
 }

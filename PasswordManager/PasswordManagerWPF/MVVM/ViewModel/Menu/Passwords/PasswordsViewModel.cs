@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Input;
 using PasswordManagerWPF.Core;
 using PasswordManagerWPF.MVVM.View.UserControls.PasswordElements;
@@ -11,12 +10,16 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords
 {
     public class PasswordsViewModel : ObservableObject
     {
+        //Observable Properties
         public ObservableCollection<PasswordElement> Passwords { get; set; }
         public ObservableCollection<CategoryViewModel> CategoryPasswords { get; set; }
         private CategoryRepository _categoryRepository;
-        public ICommand NavigateAddCategoryCommand { get; set; }
 
+        //Fields
         private readonly INavigationService _navigationService;
+        
+        //Commands
+        public ICommand NavigateAddCategoryCommand { get; set; }
 
         public PasswordsViewModel()
         {
@@ -38,7 +41,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords
             {
                 var categoryViewModel = new CategoryViewModel
                 {
-                    CategoryName = $"Category {category.Name}",
+                    CategoryName = $"CategoryCommands {category.Name}",
                     CategoryPasswords = new ObservableCollection<PasswordElement>(
                         allPasswords.Where(p => p.CategoryId == category.Id)
                                     .Select(p => new PasswordElement(p)))
@@ -47,15 +50,10 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords
             }
         }
 
+        //Command Handlers
         private void NavigateAddCategoryExecute(object? obj)
         {
             _navigationService.NavigateTo(new AddPasswordViewModel());
         }
-    }
-
-    public class CategoryViewModel
-    {
-        public string CategoryName { get; set; }
-        public ObservableCollection<PasswordElement> CategoryPasswords { get; set; }
     }
 }

@@ -11,6 +11,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Auth;
 
 public class LoginViewModel : ObservableObject
 {
+    //Observable Properties
     private string _login = null!;
     private string _password = null!;
 
@@ -32,11 +33,13 @@ public class LoginViewModel : ObservableObject
             OnPropertyChanged(nameof(Password));
         }
     }
-
+    
+    //Fields
     private readonly UserRepository _userRepository;
     private readonly UserValidator _userValidator;
     private readonly INavigationService _navigationService = new CustomNavigationService();
     
+    //Commands
     public ICommand NavigateToRegistrationCommand { get; }
     public ICommand LoginCommand { get; }
 
@@ -50,6 +53,7 @@ public class LoginViewModel : ObservableObject
         LoginCommand = new RelayCommand(ExecuteLogin);
     }
 
+    //Command Handlers
     private void ExecuteNavigateToRegistration(object? obj)
     {
         _navigationService.NavigateTo(new RegisterViewModel());

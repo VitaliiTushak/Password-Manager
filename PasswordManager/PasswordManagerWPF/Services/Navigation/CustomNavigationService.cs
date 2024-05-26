@@ -1,6 +1,5 @@
 using System.Windows;
 using PasswordManagerWPF.Core;
-using PasswordManagerWPF.MVVM.View.Auth;
 using PasswordManagerWPF.MVVM.View.Menu;
 
 namespace PasswordManagerWPF.Services.Navigation;

@@ -2,8 +2,8 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Validator;
 
 public class ValidationResult
 {
-    private List<string> Messages { get; set; } = new();
-    private int PassedChecks { get; set; } = 0;
+    private List<string> Messages { get; set; } = [];
+    private int PassedChecks { get; set; }
 
     private const int TotalChecks = 5;
 

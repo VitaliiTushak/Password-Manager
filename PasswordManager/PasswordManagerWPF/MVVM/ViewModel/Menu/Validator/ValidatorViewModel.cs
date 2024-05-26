@@ -6,6 +6,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Validator;
 
 public class ValidatorViewModel : ObservableObject
 {
+    //Observable Properties
     private string _password = null!;
     private string _validationMessages = null!;
     private double _progressValue;
@@ -37,6 +38,8 @@ public class ValidatorViewModel : ObservableObject
             OnPropertyChanged(nameof(ProgressValue));
         }
     }
+    
+    //Commands
     public ICommand ValidatePasswordCommand { get; set; }
     
     public ValidatorViewModel()
@@ -44,6 +47,7 @@ public class ValidatorViewModel : ObservableObject
         ValidatePasswordCommand = new RelayCommand(ValidatePasswordCommandExecute);
     }
 
+    //Command Handlers
     private void ValidatePasswordCommandExecute(object? obj)
     {
         if (obj is string password)

@@ -1,7 +1,6 @@
 using System.Collections.ObjectModel;
-using System.Windows.Documents;
 using System.Windows.Input;
-using PasswordManagerWPF.Commands.Passwords;
+using PasswordManagerWPF.Commands.PasswordCommands;
 using PasswordManagerWPF.Core;
 using PasswordManagerWPF.MVVM.Model;
 using PasswordManagerWPF.MVVM.ViewModel.Menu.GenerationMethods.StrategyFactory;
@@ -13,6 +12,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords;
 
 public class AddPasswordViewModel : ObservableObject
 {
+    //Observable Properties
     private string _passwordName = null!;
     private string _passwordValue = null!;
     private Category _selectedCategory = null!;
@@ -67,7 +67,6 @@ public class AddPasswordViewModel : ObservableObject
             }
         }
     }
-    
     public string Length
     {
         get => _length;
@@ -80,8 +79,9 @@ public class AddPasswordViewModel : ObservableObject
             }
         }
     }
-    
     public ObservableCollection<Category> Categories { get; set; }
+    
+    //Fields
     public List<StrategyName> PasswordGenerationStrategies { get; set; }
     private readonly CategoryRepository _categoryRepository;
     private readonly INavigationService _navigationService;
@@ -109,6 +109,7 @@ public class AddPasswordViewModel : ObservableObject
         _navigationService = new CustomNavigationService();
     }
 
+    //Command Handlers
     private void AddPasswordCommandExecute(object? obj)
     {
         if (SelectedCategory != null!)
@@ -126,13 +127,12 @@ public class AddPasswordViewModel : ObservableObject
             _navigationService.NavigateTo(new PasswordsViewModel());
         }
     }
-    
     private void GeneratePasswordCommandExecute(object? obj)
     {
         if (obj is StrategyName strategyName)
         {
             var factory = new PasswordGenerationStrategyFactory();
-            var strategy = factory.CreateStrategy(strategyName);
+            var strategy = factory.CreatePasswordGenerator(strategyName);
             PasswordValue = strategy.GeneratePassword(int.Parse(Length));
         }
     }
