@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="PasswordManagerDatabase" uuid="6c893d58-80b6-4bbc-9e48-5ff01eadb44a">
+    <data-source source="LOCAL" name="PasswordManagerDatabase" uuid="4b0307da-f6bf-4149-8a3c-36c1b2ca62dd">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:D:\ztu\2 курс\2 семестр\КПЗ\kpz_demchuk\lab_06\PasswordManager\PasswordManager\PasswordManagerWPF\Database\PasswordManagerDatabase.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\vital\OneDrive\Робочий стіл\Course 2.2\Labs\PasswordManager\PasswordManager\PasswordManagerWPF\Database\PasswordManagerDatabase.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <libraries>
         <library>

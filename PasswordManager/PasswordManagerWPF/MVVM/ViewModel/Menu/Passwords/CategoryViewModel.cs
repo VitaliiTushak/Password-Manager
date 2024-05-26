@@ -5,6 +5,10 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords;
 
 public class CategoryViewModel
 {
-    public string CategoryName { get; set; }
-    public ObservableCollection<PasswordElement> CategoryPasswords { get; set; }
+    public string CategoryName { get; set; } = null!;
+    public ObservableCollection<PasswordElement> CategoryPasswords { get; set; } = null!;
+
+    public CategoryViewModel()
+    {
+    }
 }

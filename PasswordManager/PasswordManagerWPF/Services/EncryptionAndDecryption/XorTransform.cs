@@ -1,38 +1,32 @@
 using System.Security.Cryptography;
 
-namespace PasswordManagerWPF.Services.EncryptionAndDecryption;
-
-public class XorTransform : ICryptoTransform
+namespace PasswordManagerWPF.Services.EncryptionAndDecryption
 {
-    private readonly byte _key;
-
-    public XorTransform(byte key)
+    public class XorTransform(byte key) : ICryptoTransform
     {
-        _key = key;
-    }
+        public bool CanReuseTransform => false;
+        public bool CanTransformMultipleBlocks => false;
+        public int InputBlockSize => 1;
+        public int OutputBlockSize => 1;
 
-    public bool CanReuseTransform => false;
-    public bool CanTransformMultipleBlocks => false;
-    public int InputBlockSize => 1;
-    public int OutputBlockSize => 1;
-
-    public void Dispose()
-    {
-    }
-
-    public int TransformBlock(byte[] inputBuffer, int inputOffset, int inputCount, byte[] outputBuffer, int outputOffset)
-    {
-        for (int i = 0; i < inputCount; i++)
+        public int TransformBlock(byte[] inputBuffer, int inputOffset, int inputCount, byte[] outputBuffer, int outputOffset)
         {
-            outputBuffer[outputOffset + i] = (byte)(inputBuffer[inputOffset + i] ^ _key);
+            for (int i = 0; i < inputCount; i++)
+            {
+                outputBuffer[outputOffset + i] = (byte)(inputBuffer[inputOffset + i] ^ key);
+            }
+            return inputCount;
         }
-        return inputCount;
-    }
 
-    public byte[] TransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount)
-    {
-        byte[] outputBuffer = new byte[inputCount];
-        TransformBlock(inputBuffer, inputOffset, inputCount, outputBuffer, 0);
-        return outputBuffer;
+        public byte[] TransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount)
+        {
+            byte[] outputBuffer = new byte[inputCount];
+            TransformBlock(inputBuffer, inputOffset, inputCount, outputBuffer, 0);
+            return outputBuffer;
+        }
+
+        public void Dispose()
+        {
+        }
     }
 }

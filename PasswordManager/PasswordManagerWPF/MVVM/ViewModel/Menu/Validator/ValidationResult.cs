@@ -15,19 +15,7 @@ public class ValidationResult
         PassedChecks += other.PassedChecks;
     }
     
-    public void AddMessage(string message)
-    {
-        Messages.Add(message);
-    }
-    
-    public List<string> GetMessages()
-    {
-        return Messages;
-    }
-    
-    
-    public void AddPassedCheck()
-    {
-        PassedChecks++;
-    }
+    public void AddMessage(string message) => Messages.Add(message);
+    public List<string> GetMessages() => Messages;
+    public void AddPassedCheck() => PassedChecks++;
 }

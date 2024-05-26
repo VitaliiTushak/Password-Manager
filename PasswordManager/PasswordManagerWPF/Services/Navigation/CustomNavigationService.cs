@@ -2,33 +2,38 @@ using System.Windows;
 using PasswordManagerWPF.Core;
 using PasswordManagerWPF.MVVM.View.Menu;
 
-namespace PasswordManagerWPF.Services.Navigation;
-
-public class CustomNavigationService : INavigationService
+namespace PasswordManagerWPF.Services.Navigation
 {
-    public void NavigateTo(ObservableObject viewModel)
+    public class CustomNavigationService : INavigationService
     {
-        var viewType = GetViewType(viewModel.GetType());
-        var view = Activator.CreateInstance(viewType);
-
-        if (Application.Current.MainWindow is MainWindow mainWindow)
+        public void NavigateTo(ObservableObject viewModel)
         {
-            var content = mainWindow.MainFrame.Content;
+            var viewType = GetViewType(viewModel.GetType());
+            var view = Activator.CreateInstance(viewType);
             
-            if (content is MenuView mainPage)
+            if (view is null)
+                return;
+
+            if (Application.Current.MainWindow is MainWindow mainWindow)
             {
-               mainPage.MainProgramFrame.Content = view;
-            }
-            else
-            {
-                mainWindow.MainFrame.Content = view;
+                SetMainWindowContent(mainWindow, view);
             }
         }
-    }
 
-    private Type GetViewType(Type viewModelType)
-    {
-        string viewTypeName = viewModelType.FullName!.Replace("ViewModel", "View");
-        return Type.GetType(viewTypeName)!;
+        private void SetMainWindowContent(MainWindow mainWindow, object view)
+        {
+            var content = mainWindow.MainFrame.Content;
+
+            if (content is MenuView mainPage)
+                mainPage.MainProgramFrame.Content = view;
+            else
+                mainWindow.MainFrame.Content = view;
+        }
+
+        private Type GetViewType(Type viewModelType)
+        {
+            string viewTypeName = viewModelType.FullName!.Replace("ViewModel", "View");
+            return Type.GetType(viewTypeName)!;
+        }
     }
 }

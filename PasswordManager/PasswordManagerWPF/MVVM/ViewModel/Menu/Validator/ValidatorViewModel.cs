@@ -52,23 +52,29 @@ public class ValidatorViewModel : ObservableObject
     {
         if (obj is string password)
         {
-            var lengthValidator = new LengthValidator();
-            var digitValidator = new DigitValidator();
-            var lowerCaseValidator = new LowerCaseValidator();
-            var upperCaseValidator = new UpperCaseValidator();
-            var specialCharacterValidator = new SpecialCharacterValidator();
-
-            lengthValidator
-                .SetNext(digitValidator)
-                .SetNext(lowerCaseValidator)
-                .SetNext(upperCaseValidator)
-                .SetNext(specialCharacterValidator);
+            var data = ValidatePassword(password);
             
-            var data = lengthValidator.Validate(password);
             var messages = string.Join("\n", data.GetMessages());
-            
             ValidationMessages = messages;
             ProgressValue = data.SuccessPercentage;
         }
+    }
+
+    //Methods
+    private ValidationResult ValidatePassword(string password)
+    {
+        var lengthValidator = new LengthValidator();
+        var digitValidator = new DigitValidator();
+        var lowerCaseValidator = new LowerCaseValidator();
+        var upperCaseValidator = new UpperCaseValidator();
+        var specialCharacterValidator = new SpecialCharacterValidator();
+
+        lengthValidator
+            .SetNext(digitValidator)
+            .SetNext(lowerCaseValidator)
+            .SetNext(upperCaseValidator)
+            .SetNext(specialCharacterValidator);
+        
+        return lengthValidator.Validate(password);
     }
 }
