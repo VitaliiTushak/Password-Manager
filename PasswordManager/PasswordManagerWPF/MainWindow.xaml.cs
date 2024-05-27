@@ -13,6 +13,6 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         var navigationService = new CustomNavigationService();
-        navigationService.NavigateTo(new LoginViewModel());
+        navigationService.NavigateTo(typeof(LoginViewModel));
     }
 }

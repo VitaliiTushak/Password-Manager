@@ -56,13 +56,13 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Auth
         //Command Handlers
         private void ExecuteNavigateToRegistration(object? obj)
         {
-            _navigationService.NavigateTo(new RegisterViewModel());
+            _navigationService.NavigateTo(typeof(RegisterViewModel));
         }
         private void ExecuteLogin(object? obj)
         {
             if (ValidateAndLogin())
             {
-                _navigationService.NavigateTo(new MenuViewModel());
+                _navigationService.NavigateTo(typeof(MenuViewModel));
             }
         }
 

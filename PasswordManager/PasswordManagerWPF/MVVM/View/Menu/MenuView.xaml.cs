@@ -8,6 +8,5 @@ public partial class MenuView : Page
     public MenuView()
     {
         InitializeComponent();
-        DataContext = new MenuViewModel();
     }
 }

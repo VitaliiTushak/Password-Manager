@@ -53,7 +53,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Categories
             {
                 if (ValidateAndExecuteEdit(category))
                 {
-                    _navigationService.NavigateTo(new CategoriesViewModel());
+                    _navigationService.NavigateTo(typeof(CategoriesViewModel));
                 }
             }
         }

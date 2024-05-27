@@ -8,6 +8,5 @@ public partial class ValidatorView : Page
     public ValidatorView()
     {
         InitializeComponent();
-        DataContext = new ValidatorViewModel();
     }
 }

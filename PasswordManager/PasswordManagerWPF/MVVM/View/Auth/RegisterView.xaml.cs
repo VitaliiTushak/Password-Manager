@@ -8,6 +8,5 @@ public partial class RegisterView : Page
     public RegisterView()
     {
         InitializeComponent();
-        DataContext = new RegisterViewModel();
     }
 }

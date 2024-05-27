@@ -46,7 +46,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Categories
             if (addCategoryCommand.CanExecute())
             {
                 addCategoryCommand.Execute();
-                _navigationService.NavigateTo(new CategoriesViewModel());
+                _navigationService.NavigateTo(typeof(CategoriesViewModel));
             }
         }
     }

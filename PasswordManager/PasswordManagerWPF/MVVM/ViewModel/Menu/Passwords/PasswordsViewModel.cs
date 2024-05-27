@@ -55,7 +55,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords
         //Command Handlers
         private void NavigateAddCategoryExecute(object? obj)
         {
-            _navigationService.NavigateTo(new AddPasswordViewModel());
+            _navigationService.NavigateTo(typeof(PasswordsViewModel));
         }
     }
 }

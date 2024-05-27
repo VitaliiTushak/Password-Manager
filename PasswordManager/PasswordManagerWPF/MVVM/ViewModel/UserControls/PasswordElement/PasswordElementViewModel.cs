@@ -67,7 +67,7 @@ public class PasswordElementViewModel : ObservableObject
     private void EditPassword(object? obj)
     {
         if (obj is Password password)
-            _navigationService.NavigateTo(new EditPasswordViewModel(password));
+            _navigationService.NavigateTo(typeof(EditPasswordViewModel), password);
     }
 
     private void DeletePassword(object? obj)
@@ -78,7 +78,7 @@ public class PasswordElementViewModel : ObservableObject
             if (deleteCategoryCommand.CanExecute())
             {
                 deleteCategoryCommand.Execute();
-                _navigationService.NavigateTo(new PasswordsViewModel());
+                _navigationService.NavigateTo(typeof(PasswordsViewModel), password);
             }
         }
     }

@@ -42,19 +42,13 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords
 
         //Fields
         private readonly INavigationService _navigationService;
-        private static Password _staticPassword = null!;
         
         //Commands
         public ICommand EditPasswordCommand { get; set; }
 
-        public EditPasswordViewModel(Password password = null!)
+        public EditPasswordViewModel(Password password)
         {
-            if (_staticPassword == null!)
-            {
-                _staticPassword = password;
-            }
-
-            Password = _staticPassword;
+            Password = password;
 
             EditPasswordCommand = new RelayCommand(EditPasswordCommandExecute);
 
@@ -80,7 +74,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords
                 var editPasswordCommand = new EditPasswordCommand(password);
                 editPasswordCommand.Execute();
 
-                _navigationService.NavigateTo(new PasswordsViewModel());
+                _navigationService.NavigateTo(typeof(PasswordsViewModel));
             }
         }
     }

@@ -8,6 +8,5 @@ public partial class EditCategoryView : Page
     public EditCategoryView()
     {
         InitializeComponent();
-        DataContext = new EditCategoryViewModel();
     }
 }

@@ -20,7 +20,8 @@ public class MenuViewModel : ObservableObject
     {
         NavigateCommand = new RelayCommand(NavigationExecute);
         _navigationService = new CustomNavigationService();
-        _navigationService.NavigateTo(new ValidatorViewModel());
+
+        NavigateToPasswords();
     }
 
     //Command Handlers
@@ -52,18 +53,18 @@ public class MenuViewModel : ObservableObject
     // Navigation Methods
     private void NavigateToPasswords()
     {
-        _navigationService.NavigateTo(new PasswordsViewModel());
+        _navigationService.NavigateTo(typeof(PasswordsViewModel));
     }
     private void NavigateToCategories()
     {
-        _navigationService.NavigateTo(new CategoriesViewModel());
+        _navigationService.NavigateTo(typeof(CategoriesViewModel));
     }
     private void NavigateToImportExport()
     {
-        _navigationService.NavigateTo(new ImportExportViewModel());
+        _navigationService.NavigateTo(typeof(ImportExportViewModel));
     }
     private void NavigateToValidator()
     {
-        _navigationService.NavigateTo(new ValidatorViewModel());
+        _navigationService.NavigateTo(typeof(ValidatorViewModel));
     }
 }

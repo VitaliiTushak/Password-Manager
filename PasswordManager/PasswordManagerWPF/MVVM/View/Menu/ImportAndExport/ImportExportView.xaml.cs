@@ -8,6 +8,5 @@ public partial class ImportExportView : Page
     public ImportExportView()
     {
         InitializeComponent();
-        DataContext = new ImportExportViewModel();
     }
 }

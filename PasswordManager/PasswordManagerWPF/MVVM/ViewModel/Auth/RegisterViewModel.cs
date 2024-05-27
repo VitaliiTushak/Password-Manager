@@ -66,7 +66,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Auth
         {
             if (ValidateAndRegister())
             {
-                _navigationService.NavigateTo(new LoginViewModel());
+                _navigationService.NavigateTo(typeof(LoginViewModel));
             }
         }
 

@@ -48,7 +48,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.ImportAndExport
             }
 
             _dialogService.ShowMessage("Passwords imported successfully!", "Success", DialogType.Info);
-            _navigationService.NavigateTo(new PasswordsViewModel());
+            _navigationService.NavigateTo(typeof(PasswordsViewModel));
         }
 
         private void ExportPasswordsCommandExecute(object? obj)

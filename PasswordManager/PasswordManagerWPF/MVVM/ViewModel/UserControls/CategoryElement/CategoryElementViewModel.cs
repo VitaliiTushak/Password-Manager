@@ -40,7 +40,7 @@ public class CategoryElementViewModel : ObservableObject
     private void EditCategory(object? obj)
     {
         if (obj is Category category)
-            _navigationService.NavigateTo(new EditCategoryViewModel(category));
+            _navigationService.NavigateTo(typeof(EditCategoryViewModel), category);
     }
 
     private void DeleteCategory(object? obj)
@@ -51,7 +51,7 @@ public class CategoryElementViewModel : ObservableObject
             if (deleteCategoryCommand.CanExecute())
             {
                 deleteCategoryCommand.Execute();
-                _navigationService.NavigateTo(new CategoriesViewModel());
+                _navigationService.NavigateTo(typeof(CategoriesViewModel), category);
             }
         }
     }

@@ -124,7 +124,7 @@ public class AddPasswordViewModel : ObservableObject
             var addPasswordCommand = new AddPasswordCommand(password);
             addPasswordCommand.Execute();
             
-            _navigationService.NavigateTo(new PasswordsViewModel());
+            _navigationService.NavigateTo(typeof(PasswordsViewModel));
         }
     }
     private void GeneratePasswordCommandExecute(object? obj)

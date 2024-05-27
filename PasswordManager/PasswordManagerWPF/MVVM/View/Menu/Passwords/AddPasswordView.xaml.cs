@@ -8,6 +8,5 @@ public partial class AddPasswordView : Page
     public AddPasswordView()
     {
         InitializeComponent();
-        DataContext = new AddPasswordViewModel();
     }
 }
