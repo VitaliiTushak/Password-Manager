@@ -17,7 +17,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.ImportAndExport
         //Fields
         private readonly PasswordRepositoryDecorator _passwordRepository;
         private readonly IDialogService _dialogService;
-        private INavigationService _navigationService;
+        private readonly INavigationService _navigationService;
 
         //Commands
         public ICommand ImportPasswordsCommand { get; }

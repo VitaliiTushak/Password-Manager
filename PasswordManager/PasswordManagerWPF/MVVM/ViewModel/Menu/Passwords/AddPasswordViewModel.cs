@@ -129,11 +129,8 @@ public class AddPasswordViewModel : ObservableObject
     }
     private void GeneratePasswordCommandExecute(object? obj)
     {
-        if (obj is StrategyName strategyName)
-        {
-            var factory = new PasswordGenerationStrategyFactory();
-            var strategy = factory.CreatePasswordGenerator(strategyName);
-            PasswordValue = strategy.GeneratePassword(int.Parse(Length));
-        }
+        var factory = new PasswordGenerationStrategyFactory();
+        var strategy = factory.CreatePasswordGenerator(SelectedStrategy);
+        PasswordValue = strategy.GeneratePassword(int.Parse(Length));
     }
 }

@@ -50,14 +50,10 @@ public class ValidatorViewModel : ObservableObject
     //Command Handlers
     private void ValidatePasswordCommandExecute(object? obj)
     {
-        if (obj is string password)
-        {
-            var data = ValidatePassword(password);
-            
-            var messages = string.Join("\n", data.GetMessages());
-            ValidationMessages = messages;
-            ProgressValue = data.SuccessPercentage;
-        }
+        var data = ValidatePassword(Password);
+        var messages = string.Join("\n", data.GetMessages());
+        ValidationMessages = messages;
+        ProgressValue = data.SuccessPercentage;
     }
 
     //Methods

@@ -24,7 +24,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Categories
         }
         
         //Fields
-        private static Category _staticCategory = null!;
+        private static Category StaticCategory { get; set; } = null!;
         private readonly ICategoryValidator _categoryValidator;
         private readonly INavigationService _navigationService;
         
@@ -33,8 +33,8 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Categories
 
         public EditCategoryViewModel(Category category = null!)
         {
-            if (_staticCategory == null!)
-                _staticCategory = category;
+            if (StaticCategory == null!)
+                StaticCategory = category;
             
             EditCategoryCommand = new RelayCommand(EditCategoryCommandExecute);
 
@@ -43,7 +43,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Categories
             _categoryValidator = new CategoryValidator(categoryRepository, dialogService);
             _navigationService = new CustomNavigationService();
             
-            Category = _staticCategory;
+            Category = StaticCategory;
         }
 
         // Command Handlers

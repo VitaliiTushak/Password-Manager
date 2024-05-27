@@ -7,7 +7,7 @@ public class ValidationResult
 
     private const int TotalChecks = 5;
 
-    public double SuccessPercentage => (PassedChecks / (double)TotalChecks) * 100;
+    public double SuccessPercentage => PassedChecks / (double)TotalChecks * 100;
     
     public void Merge(ValidationResult other)
     {

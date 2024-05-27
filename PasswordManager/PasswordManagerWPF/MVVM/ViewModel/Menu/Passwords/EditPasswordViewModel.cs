@@ -68,10 +68,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords
         //Command Handlers
         private void EditPasswordCommandExecute(object? obj)
         {
-            if (obj is Password password)
-            {
-                EditPassword(password);
-            }
+            EditPassword(Password);
         }
         
         //Methods
