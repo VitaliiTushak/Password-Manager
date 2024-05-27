@@ -50,7 +50,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Auth
         private readonly INavigationService _navigationService;
 
         //Commands
-        public ICommand RegisterCommand { get; }
+        public ICommand RegisterCommand { get; set; }
 
         public RegisterViewModel()
         {

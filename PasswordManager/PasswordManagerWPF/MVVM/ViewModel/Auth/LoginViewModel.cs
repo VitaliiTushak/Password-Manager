@@ -40,8 +40,8 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Auth
         private readonly INavigationService _navigationService = new CustomNavigationService();
         
         //Commands
-        public ICommand NavigateToRegistrationCommand { get; }
-        public ICommand LoginCommand { get; }
+        public ICommand NavigateToRegistrationCommand { get; set; }
+        public ICommand LoginCommand { get; set; }
 
         public LoginViewModel()
         {
