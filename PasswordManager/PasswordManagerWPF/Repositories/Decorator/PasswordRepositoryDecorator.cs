@@ -1,15 +1,15 @@
-
 using PasswordManagerWPF.MVVM.Model;
 using PasswordManagerWPF.Repositories.RepositoryFactory;
 using PasswordManagerWPF.Services;
+using PasswordManagerWPF.Services.EncryptionAndDecryption;
 
 namespace PasswordManagerWPF.Repositories
 {
     public class PasswordRepositoryDecorator() : IRepository<Password>
     {
         private readonly IRepository<Password> _repository = null!;
-        private static List<Password> _encryptedPasswords = new();
-        private static List<string> _encryptedPasswordsValues = new();
+        private static List<Password> _encryptedPasswords = [];
+        private static List<string> _encryptedPasswordsValues = [];
 
         public PasswordRepositoryDecorator(IRepository<Password> repository) : this()
         {

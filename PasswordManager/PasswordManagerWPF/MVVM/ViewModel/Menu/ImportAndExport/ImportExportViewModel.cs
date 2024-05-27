@@ -1,11 +1,8 @@
-using System.Collections.Generic;
 using System.IO;
 using System.Windows.Input;
 using Microsoft.Win32;
-using PasswordManagerWPF.Commands.Passwords;
+using PasswordManagerWPF.Commands.PasswordCommands;
 using PasswordManagerWPF.Core;
-using PasswordManagerWPF.MVVM.Model;
-using PasswordManagerWPF.MVVM.ViewModel.Menu.ImportAndExport.Strategies;
 using PasswordManagerWPF.MVVM.ViewModel.Menu.ImportAndExport.Strategy;
 using PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords;
 using PasswordManagerWPF.Services.Dialog;
@@ -17,10 +14,12 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.ImportAndExport
 {
     public class ImportExportViewModel : ObservableObject
     {
+        //Fields
         private readonly PasswordRepositoryDecorator _passwordRepository;
         private readonly IDialogService _dialogService;
-        private INavigationService _navigationService;
+        private readonly INavigationService _navigationService;
 
+        //Commands
         public ICommand ImportPasswordsCommand { get; }
         public ICommand ExportPasswordsCommand { get; }
 
@@ -35,6 +34,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.ImportAndExport
             ExportPasswordsCommand = new RelayCommand(ExportPasswordsCommandExecute);
         }
 
+        //Command Handlers
         private void ImportPasswordsCommandExecute(object? obj)
         {
             var filePath = OpenFile("JSON files (*.json)|*.json|CSV files (*.csv)|*.csv");
@@ -48,7 +48,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.ImportAndExport
             }
 
             _dialogService.ShowMessage("Passwords imported successfully!", "Success", DialogType.Info);
-            _navigationService.NavigateTo(new PasswordsViewModel());
+            _navigationService.NavigateTo(typeof(PasswordsViewModel));
         }
 
         private void ExportPasswordsCommandExecute(object? obj)
@@ -62,13 +62,14 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.ImportAndExport
             _dialogService.ShowMessage("Passwords exported successfully!", "Success", DialogType.Info);
         }
 
-        private string? OpenFile(string filter)
+        //Methods
+        private static string? OpenFile(string filter)
         {
             var openFileDialog = new OpenFileDialog { Filter = filter };
             return openFileDialog.ShowDialog() == true ? openFileDialog.FileName : null;
         }
 
-        private string? SaveFile(string filter)
+        private static string? SaveFile(string filter)
         {
             var saveFileDialog = new SaveFileDialog { Filter = filter };
             return saveFileDialog.ShowDialog() == true ? saveFileDialog.FileName : null;
@@ -77,7 +78,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.ImportAndExport
         private IPasswordImportExportStrategy CreateStrategyFromFilePath(string filePath)
         {
             var format = Path.GetExtension(filePath).TrimStart('.').ToLower();
-            return PasswordImportExportStrategyFactory.CreateStrategy(GetStrategy(format));
+            return PasswordImportExportStrategyFactory.CreatePasswordImportExportStrategy(GetStrategy(format));
         }
 
         private PasswordImportExportStrategy GetStrategy(string format)

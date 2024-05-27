@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using PasswordManagerWPF.Commands.Passwords;
+using PasswordManagerWPF.Commands.PasswordCommands;
 using PasswordManagerWPF.Core;
 using PasswordManagerWPF.MVVM.Model;
 using PasswordManagerWPF.Repositories.RepositoryFactory;
@@ -10,6 +10,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords
 {
     public class EditPasswordViewModel : ObservableObject
     {
+        //Observable Properties
         private Category _selectedCategory = null!;
         private Password _password = null!;
 
@@ -37,21 +38,17 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords
                 }
             }
         }
-
         public ObservableCollection<Category> Categories { get; set; }
+
+        //Fields
+        private readonly INavigationService _navigationService;
+        
+        //Commands
         public ICommand EditPasswordCommand { get; set; }
 
-        private readonly INavigationService _navigationService;
-        private static Password _staticPassword = null!;
-
-        public EditPasswordViewModel(Password password = null!)
+        public EditPasswordViewModel(Password password)
         {
-            if (_staticPassword == null!)
-            {
-                _staticPassword = password;
-            }
-
-            Password = _staticPassword;
+            Password = password;
 
             EditPasswordCommand = new RelayCommand(EditPasswordCommandExecute);
 
@@ -62,18 +59,22 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords
             _navigationService = new CustomNavigationService();
         }
 
+        //Command Handlers
         private void EditPasswordCommandExecute(object? obj)
         {
-            if (obj is Password password)
+            EditPassword(Password);
+        }
+        
+        //Methods
+        private void EditPassword(Password password)
+        {
+            if (SelectedCategory != null!)
             {
-                if (SelectedCategory != null!)
-                {
-                    password.CategoryId = SelectedCategory.Id;
-                    var addPasswordCommand = new EditPasswordCommand(password);
-                    addPasswordCommand.Execute();
+                password.CategoryId = SelectedCategory.Id;
+                var editPasswordCommand = new EditPasswordCommand(password);
+                editPasswordCommand.Execute();
 
-                    _navigationService.NavigateTo(new PasswordsViewModel());
-                }
+                _navigationService.NavigateTo(typeof(PasswordsViewModel));
             }
         }
     }

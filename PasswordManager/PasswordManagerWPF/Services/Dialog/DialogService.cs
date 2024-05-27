@@ -11,10 +11,17 @@ namespace PasswordManagerWPF.Services.Dialog
                 DialogType.Error => MessageBoxImage.Error,
                 DialogType.Info => MessageBoxImage.Information,
                 DialogType.Warning => MessageBoxImage.Warning,
-                _ => throw new ArgumentOutOfRangeException(nameof(dialogType), dialogType, null)
+                _ => MessageBoxImage.Information
             };
 
             MessageBox.Show(message, title, MessageBoxButton.OK, icon);
         }
     }
+}
+
+public enum DialogType
+{
+    Info,
+    Warning,
+    Error
 }

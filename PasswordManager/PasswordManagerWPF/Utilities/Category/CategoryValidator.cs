@@ -5,11 +5,16 @@ namespace PasswordManagerWPF.Utilities.Category;
 
 public class CategoryValidator(CategoryRepository categoryRepository, IDialogService dialogService) : ICategoryValidator
 {
+    private void ShowErrorMessage(string message, string title)
+    {
+        dialogService.ShowMessage(message, title, DialogType.Error);
+    }
+
     public bool IsCategoryNameValid(string name)
     {
         if (!StringValidator.IsStringValid(name))
         {
-            dialogService.ShowMessage("Введіть назву категорії", "Помилка", DialogType.Error);
+            ShowErrorMessage("Введіть назву категорії", "Помилка");
             return false;
         }
         
@@ -20,7 +25,7 @@ public class CategoryValidator(CategoryRepository categoryRepository, IDialogSer
     {
         if (categoryRepository.GetCategoryByName(name) != null!)
         {
-            dialogService.ShowMessage("Така категорія вже існує", "Помилка", DialogType.Error);
+            ShowErrorMessage("Така категорія вже існує", "Помилка");
             return false;
         }
         
@@ -31,7 +36,7 @@ public class CategoryValidator(CategoryRepository categoryRepository, IDialogSer
     {
         if (categoryRepository.GetCategoryByName(name) == null!)
         {
-            dialogService.ShowMessage("Такої категорії не існує", "Помилка", DialogType.Error);
+            ShowErrorMessage("Такої категорії не існує", "Помилка");
             return false;
         }
         

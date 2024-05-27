@@ -1,5 +1,4 @@
 using System.Windows.Input;
-using Microsoft.EntityFrameworkCore;
 
 namespace PasswordManagerWPF.Core;
 

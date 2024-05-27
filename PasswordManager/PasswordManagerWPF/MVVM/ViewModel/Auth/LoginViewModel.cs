@@ -7,61 +7,75 @@ using PasswordManagerWPF.Services.Dialog;
 using PasswordManagerWPF.Services.Navigation;
 using PasswordManagerWPF.Utilities.User;
 
-namespace PasswordManagerWPF.MVVM.ViewModel.Auth;
-
-public class LoginViewModel : ObservableObject
+namespace PasswordManagerWPF.MVVM.ViewModel.Auth
 {
-    private string _login = null!;
-    private string _password = null!;
-
-    public string Login
+    public class LoginViewModel : ObservableObject
     {
-        get => _login;
-        set
+        //Observable Properties
+        private string _login = null!;
+        private string _password = null!;
+
+        public string Login
         {
-            _login = value;
-            OnPropertyChanged(nameof(Login));
+            get => _login;
+            set
+            {
+                _login = value;
+                OnPropertyChanged(nameof(Login));
+            }
         }
-    }
-    public string Password
-    {
-        get => _password;
-        set
+        public string Password
         {
-            _password = value;
-            OnPropertyChanged(nameof(Password));
+            get => _password;
+            set
+            {
+                _password = value;
+                OnPropertyChanged(nameof(Password));
+            }
         }
-    }
-
-    private readonly UserRepository _userRepository;
-    private readonly UserValidator _userValidator;
-    private readonly INavigationService _navigationService = new CustomNavigationService();
-    
-    public ICommand NavigateToRegistrationCommand { get; }
-    public ICommand LoginCommand { get; }
-
-    public LoginViewModel()
-    {
-        _userRepository = RepositoryFactory.GetInstance().GetUserRepository();
-        IDialogService dialogService = new DialogService();
-        _userValidator = new UserValidator(_userRepository, dialogService);
         
-        NavigateToRegistrationCommand = new RelayCommand(ExecuteNavigateToRegistration);
-        LoginCommand = new RelayCommand(ExecuteLogin);
-    }
+        //Fields
+        private readonly UserRepository _userRepository;
+        private readonly UserValidator _userValidator;
+        private readonly INavigationService _navigationService = new CustomNavigationService();
+        
+        //Commands
+        public ICommand NavigateToRegistrationCommand { get; }
+        public ICommand LoginCommand { get; }
 
-    private void ExecuteNavigateToRegistration(object? obj)
-    {
-        _navigationService.NavigateTo(new RegisterViewModel());
-    }
-
-    private void ExecuteLogin(object? obj)
-    {
-        if (_userValidator.ValidateLogin(Login, Password))
+        public LoginViewModel()
         {
-            var user = _userRepository.GetUserByLogin(Login);
-            UserRepository.CurrentUser = user;
-            _navigationService.NavigateTo(new MenuViewModel());
+            _userRepository = RepositoryFactory.GetInstance().GetUserRepository();
+            IDialogService dialogService = new DialogService();
+            _userValidator = new UserValidator(_userRepository, dialogService);
+            
+            NavigateToRegistrationCommand = new RelayCommand(ExecuteNavigateToRegistration);
+            LoginCommand = new RelayCommand(ExecuteLogin);
+        }
+
+        //Command Handlers
+        private void ExecuteNavigateToRegistration(object? obj)
+        {
+            _navigationService.NavigateTo(typeof(RegisterViewModel));
+        }
+        private void ExecuteLogin(object? obj)
+        {
+            if (ValidateAndLogin())
+            {
+                _navigationService.NavigateTo(typeof(MenuViewModel));
+            }
+        }
+
+        //Methods
+        private bool ValidateAndLogin()
+        {
+            if (_userValidator.ValidateLogin(Login, Password))
+            {
+                var user = _userRepository.GetUserByLogin(Login);
+                UserRepository.CurrentUser = user;
+                return true;
+            }
+            return false;
         }
     }
 }

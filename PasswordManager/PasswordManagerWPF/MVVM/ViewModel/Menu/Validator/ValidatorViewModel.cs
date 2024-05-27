@@ -6,6 +6,7 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Validator;
 
 public class ValidatorViewModel : ObservableObject
 {
+    //Observable Properties
     private string _password = null!;
     private string _validationMessages = null!;
     private double _progressValue;
@@ -37,6 +38,8 @@ public class ValidatorViewModel : ObservableObject
             OnPropertyChanged(nameof(ProgressValue));
         }
     }
+    
+    //Commands
     public ICommand ValidatePasswordCommand { get; set; }
     
     public ValidatorViewModel()
@@ -44,27 +47,30 @@ public class ValidatorViewModel : ObservableObject
         ValidatePasswordCommand = new RelayCommand(ValidatePasswordCommandExecute);
     }
 
+    //Command Handlers
     private void ValidatePasswordCommandExecute(object? obj)
     {
-        if (obj is string password)
-        {
-            var lengthValidator = new LengthValidator();
-            var digitValidator = new DigitValidator();
-            var lowerCaseValidator = new LowerCaseValidator();
-            var upperCaseValidator = new UpperCaseValidator();
-            var specialCharacterValidator = new SpecialCharacterValidator();
+        var data = ValidatePassword(Password);
+        var messages = string.Join("\n", data.GetMessages());
+        ValidationMessages = messages;
+        ProgressValue = data.SuccessPercentage;
+    }
 
-            lengthValidator
-                .SetNext(digitValidator)
-                .SetNext(lowerCaseValidator)
-                .SetNext(upperCaseValidator)
-                .SetNext(specialCharacterValidator);
-            
-            var data = lengthValidator.Validate(password);
-            var messages = string.Join("\n", data.GetMessages());
-            
-            ValidationMessages = messages;
-            ProgressValue = data.SuccessPercentage;
-        }
+    //Methods
+    private ValidationResult ValidatePassword(string password)
+    {
+        var lengthValidator = new LengthValidator();
+        var digitValidator = new DigitValidator();
+        var lowerCaseValidator = new LowerCaseValidator();
+        var upperCaseValidator = new UpperCaseValidator();
+        var specialCharacterValidator = new SpecialCharacterValidator();
+
+        lengthValidator
+            .SetNext(digitValidator)
+            .SetNext(lowerCaseValidator)
+            .SetNext(upperCaseValidator)
+            .SetNext(specialCharacterValidator);
+        
+        return lengthValidator.Validate(password);
     }
 }

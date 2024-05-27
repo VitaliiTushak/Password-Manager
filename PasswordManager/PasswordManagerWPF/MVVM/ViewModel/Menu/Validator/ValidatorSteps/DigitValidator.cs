@@ -1,5 +1,3 @@
-using PasswordManagerWPF.Services.Dialog;
-
 namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Validator.ValidatorSteps;
 
 public class DigitValidator : PasswordValidatorBase

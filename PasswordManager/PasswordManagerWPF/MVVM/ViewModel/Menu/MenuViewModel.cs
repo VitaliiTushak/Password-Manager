@@ -1,6 +1,5 @@
 using System.Windows.Input;
 using PasswordManagerWPF.Core;
-using PasswordManagerWPF.MVVM.View.Menu;
 using PasswordManagerWPF.MVVM.ViewModel.Menu.Categories;
 using PasswordManagerWPF.MVVM.ViewModel.Menu.ImportAndExport;
 using PasswordManagerWPF.MVVM.ViewModel.Menu.Passwords;
@@ -11,18 +10,21 @@ namespace PasswordManagerWPF.MVVM.ViewModel.Menu;
 
 public class MenuViewModel : ObservableObject
 {
-    public ICommand NavigateCommand { get; }
-    
+    //Fields
     private readonly INavigationService _navigationService;
     
+    //Commands
+    public ICommand NavigateCommand { get; set; }
     
     public MenuViewModel()
     {
         NavigateCommand = new RelayCommand(NavigationExecute);
         _navigationService = new CustomNavigationService();
-        _navigationService.NavigateTo(new ValidatorViewModel());
+
+        NavigateToPasswords();
     }
 
+    //Command Handlers
     private void NavigationExecute(object? obj)
     {
         if (obj is string destination)
@@ -30,21 +32,39 @@ public class MenuViewModel : ObservableObject
             switch (destination)
             {
                 case "Passwords":
-                    _navigationService.NavigateTo(new PasswordsViewModel());
+                    NavigateToPasswords();
                     break;
                 case "Categories":
-                    _navigationService.NavigateTo(new CategoriesViewModel());
+                    NavigateToCategories();
                     break;
                 case "ImportExport":
-                    _navigationService.NavigateTo(new ImportExportViewModel());
+                    NavigateToImportExport();
                     break;
                 case "Validator":
-                    _navigationService.NavigateTo(new ValidatorViewModel());
+                    NavigateToValidator();
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(destination), destination, null);
+                    NavigateToPasswords();
+                    break;
             }
         }
     }
 
+    // Navigation Methods
+    private void NavigateToPasswords()
+    {
+        _navigationService.NavigateTo(typeof(PasswordsViewModel));
+    }
+    private void NavigateToCategories()
+    {
+        _navigationService.NavigateTo(typeof(CategoriesViewModel));
+    }
+    private void NavigateToImportExport()
+    {
+        _navigationService.NavigateTo(typeof(ImportExportViewModel));
+    }
+    private void NavigateToValidator()
+    {
+        _navigationService.NavigateTo(typeof(ValidatorViewModel));
+    }
 }

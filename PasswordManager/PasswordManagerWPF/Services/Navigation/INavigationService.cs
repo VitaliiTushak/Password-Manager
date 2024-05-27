@@ -4,5 +4,5 @@ namespace PasswordManagerWPF.Services.Navigation;
 
 public interface INavigationService
 {
-    void NavigateTo(ObservableObject viewModel);
+    void NavigateTo(Type viewModelType, object parameter = null!);
 }

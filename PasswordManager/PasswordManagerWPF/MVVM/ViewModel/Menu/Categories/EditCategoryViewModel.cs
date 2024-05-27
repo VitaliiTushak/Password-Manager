@@ -1,5 +1,5 @@
 using System.Windows.Input;
-using PasswordManagerWPF.Commands.Category;
+using PasswordManagerWPF.Commands.CategoryCommands;
 using PasswordManagerWPF.Core;
 using PasswordManagerWPF.MVVM.Model;
 using PasswordManagerWPF.Repositories.RepositoryFactory;
@@ -7,54 +7,68 @@ using PasswordManagerWPF.Services.Dialog;
 using PasswordManagerWPF.Services.Navigation;
 using PasswordManagerWPF.Utilities.Category;
 
-namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Categories;
-
-public class EditCategoryViewModel : ObservableObject
+namespace PasswordManagerWPF.MVVM.ViewModel.Menu.Categories
 {
-    private Category _category = null!;
-    public Category Category
+    public class EditCategoryViewModel : ObservableObject
     {
-        get => _category;
-        set
+        //Observable Properties
+        private Category _category = null!;
+        public Category Category
         {
-            _category = value;
-            OnPropertyChanged(nameof(Category));
+            get => _category;
+            set
+            {
+                _category = value;
+                OnPropertyChanged(nameof(Category));
+            }
         }
-    }
-    
-    private static Category _staticCategory = null!;
-    
-    public ICommand EditCategoryCommand { get; }
-
-    private readonly ICategoryValidator _categoryValidator;
-    private readonly INavigationService _navigationService;
-
-    public EditCategoryViewModel(Category category = null!)
-    {
-        if (_staticCategory == null!)
-            _staticCategory = category;
         
-        EditCategoryCommand = new RelayCommand(EditCategoryCommandExecute);
-
-        var categoryRepository = RepositoryFactory.GetInstance().GetCategoryRepository();
-        IDialogService dialogService = new DialogService();
-        _categoryValidator = new CategoryValidator(categoryRepository, dialogService);
-        _navigationService = new CustomNavigationService();
+        //Fields
+        private static Category StaticCategory { get; set; } = null!;
+        private readonly ICategoryValidator _categoryValidator;
+        private readonly INavigationService _navigationService;
         
-        Category = _staticCategory;
-    }
+        //Commands
+        public ICommand EditCategoryCommand { get; set; }
 
-    private void EditCategoryCommandExecute(object? obj)
-    {
-        if (obj is Category category)
+        public EditCategoryViewModel(Category category = null!)
+        {
+            if (StaticCategory == null!)
+                StaticCategory = category;
+            
+            EditCategoryCommand = new RelayCommand(EditCategoryCommandExecute);
+
+            var categoryRepository = RepositoryFactory.GetInstance().GetCategoryRepository();
+            IDialogService dialogService = new DialogService();
+            _categoryValidator = new CategoryValidator(categoryRepository, dialogService);
+            _navigationService = new CustomNavigationService();
+            
+            Category = StaticCategory;
+        }
+
+        // Command Handlers
+        private void EditCategoryCommandExecute(object? obj)
+        {
+            if (obj is Category category)
+            {
+                if (ValidateAndExecuteEdit(category))
+                {
+                    _navigationService.NavigateTo(typeof(CategoriesViewModel));
+                }
+            }
+        }
+        
+        //Methods
+        private bool ValidateAndExecuteEdit(Category category)
         {
             var result = _categoryValidator.IsCategoryNameValid(category.Name);
             if (result)
             {
-                var editCategoryCommand = new EditCustomCommand(category);
+                var editCategoryCommand = new EditCategoryCommand(category);
                 editCategoryCommand.Execute();
-                _navigationService.NavigateTo(new CategoriesViewModel());
+                return true;
             }
+            return false;
         }
     }
 }

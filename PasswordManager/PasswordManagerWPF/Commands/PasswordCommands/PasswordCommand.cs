@@ -2,7 +2,7 @@ using PasswordManagerWPF.MVVM.Model;
 using PasswordManagerWPF.Repositories;
 using PasswordManagerWPF.Repositories.RepositoryFactory;
 
-namespace PasswordManagerWPF.Commands.Passwords;
+namespace PasswordManagerWPF.Commands.PasswordCommands;
 
 public abstract class PasswordCommand(Password password)
 {

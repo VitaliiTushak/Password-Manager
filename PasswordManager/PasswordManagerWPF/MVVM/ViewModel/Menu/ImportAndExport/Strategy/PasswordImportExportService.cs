@@ -1,17 +1,23 @@
 using PasswordManagerWPF.MVVM.Model;
-using PasswordManagerWPF.MVVM.ViewModel.Menu.ImportAndExport.Strategies;
+using System.Collections.Generic;
 
-namespace PasswordManagerWPF.MVVM.ViewModel.Menu.ImportAndExport.Strategy;
-
-public class PasswordImportExportService(IPasswordImportExportStrategy strategy)
+namespace PasswordManagerWPF.MVVM.ViewModel.Menu.ImportAndExport.Strategy
 {
-    public void ExportPasswords(string filePath, IEnumerable<Password> passwords)
+    public class PasswordImportExportService(IPasswordImportExportStrategy strategy) : IPasswordImportExportStrategy
     {
-        strategy.ExportPasswords(filePath, passwords);
-    }
+        public void SetStrategy(IPasswordImportExportStrategy strategy1)
+        {
+            strategy = strategy1;
+        }
 
-    public IEnumerable<Password> ImportPasswords(string filePath)
-    {
-        return strategy.ImportPasswords(filePath);
+        public void ExportPasswords(string filePath, IEnumerable<Password> passwords)
+        {
+            strategy.ExportPasswords(filePath, passwords);
+        }
+
+        public IEnumerable<Password> ImportPasswords(string filePath)
+        {
+            return strategy.ImportPasswords(filePath);
+        }
     }
 }

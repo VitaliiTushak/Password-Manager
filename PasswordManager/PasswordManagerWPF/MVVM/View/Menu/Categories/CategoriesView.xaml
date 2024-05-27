@@ -18,7 +18,7 @@
                     Orientation="Horizontal"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
-            <Button Margin="10" Content="Add Category"
+            <Button Margin="10" Content="Add CategoryCommands"
                     Command="{Binding NavigateAddCategoryCommand}"></Button>
         </StackPanel>
         

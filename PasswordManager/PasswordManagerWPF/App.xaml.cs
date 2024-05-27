@@ -1,8 +1,4 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
-using Microsoft.EntityFrameworkCore;
-using PasswordManagerWPF.Database;
+﻿using System.Windows;
 
 namespace PasswordManagerWPF;
 
@@ -11,6 +7,4 @@ namespace PasswordManagerWPF;
 /// </summary>
 public partial class App : Application
 {
-    ApplicationContext context = new ApplicationContext();
-    
 }
